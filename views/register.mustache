@@ -1,0 +1,194 @@
+<html>
+
+
+<h1>REGISTER</h1>
+<div id="register">
+    <form action="/register" method=POST>
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Re - Enter Password" name="pswR" required>
+
+        <label for="unis">Universities : </label>
+        <select name="unis" id="unis">
+        <option value="University of Aberdeen">University of Aberdeen</option>
+        <option value="University of Wales, Aberystwyth">University of Wales, Aberystwyth</option>
+        <option value="University of Abertay Dundee">University of Abertay Dundee</option>
+        <option value="American InterContinental University - London">American InterContinental University - London</option>
+        <option value="Aga Khan University">Aga Khan University</option>
+        <option value="Anglia Ruskin University">Anglia Ruskin University</option>
+        <option value="Aston University">Aston University</option>
+        <option value="The American University in London">The American University in London</option>
+        <option value=""University of Wales, Bangor">"University of Wales, Bangor</option>
+        <option value="University of Bath">University of Bath</option>
+        <option value="Birkbeck College, University of London">Birkbeck College, University of London</option>
+        <option value="British College of Osteopathic Medicine">British College of Osteopathic Medicine</option>
+        <option value="Birmingham City University">Birmingham City University</option>
+        <option value="University of Bedfordshire">University of Bedfordshire</option>
+        <option value="University of Birmingham">University of Birmingham</option>
+        <option value="University of Bolton">University of Bolton</option>
+        <option value="Bournemouth University">Bournemouth University</option>
+        <option value="University of Bradford"">University of Bradford"</option>
+        <option value="London School of Jewish Studies">London School of Jewish Studies</option>
+        <option value="University of Bristol">University of Bristol</option>
+        <option value="Oxford Brookes University">Oxford Brookes University</option>
+        <option value="Brunel University Uxbridge">Brunel University Uxbridge</option>
+        <option value="University of Brighton">University of Brighton</option>
+        <option value="University of Buckingham">University of Buckingham</option>
+        <option value="Buckinghamshire New University">Buckinghamshire New University</option>
+        <option value="University of Cambridge">University of Cambridge</option>
+        <option value="Camberwell College of Arts">Camberwell College of Arts</option>
+        <option value="Canterbury Christ Church University">Canterbury Christ Church University</option>
+        <option value="Cardiff University">Cardiff University</option>
+        <option value="Chelsea College of Art and Design">Chelsea College of Art and Design</option>
+        <option value="University of Chester">University of Chester</option>
+        <option value="City University">City University</option>
+        <option value="Courtauld Institute of Art, University of London">Courtauld Institute of Art, University of London</option>
+        <option value="Coventry University">Coventry University</option>
+        <option value="Cranfield University">Cranfield University</option>
+        <option value="Central Saint Martins College of Art & Design">Central Saint Martins College of Art & Design</option>
+        <option value="University of Derby">University of Derby</option>
+        <option value="De Montfort University Leicester">De Montfort University Leicester</option>
+        <option value="University of Dundee">University of Dundee</option>
+        <option value="University of Durham">University of Durham</option>
+        <option value="Edge Hill University">Edge Hill University</option>
+        <option value="University of Edinburgh">University of Edinburgh</option>
+        <option value="European School of Economics">European School of Economics</option>
+        <option value="University of Essex">University of Essex</option>
+        <option value="University of Exeter">University of Exeter</option>
+        <option value="Falmouth University">Falmouth University</option>
+        <option value="Glasgow Caledonian University">Glasgow Caledonian University</option>
+        <option value="University of Glasgow">University of Glasgow</option>
+        <option value="University of Glamorgan">University of Glamorgan</option>
+        <option value="University of Gloucestershire">University of Gloucestershire</option>
+        <option value="Goldsmiths College, University of London">Goldsmiths College, University of London</option>
+        <option value="University of Greenwich">University of Greenwich</option>
+        <option value="Glasgow School of Art">Glasgow School of Art</option>
+        <option value="University of Halifax, Birmingham Campus">University of Halifax, Birmingham Campus</option>
+        <option value="University of Hertfordshire">University of Hertfordshire</option>
+        <option value="Heythrop College, University of London">Heythrop College, University of London</option>
+        <option value="Liverpool Hope University College">Liverpool Hope University College</option>
+        <option value="University of Huddersfield">University of Huddersfield</option>
+        <option value="University of Hull">University of Hull</option>
+        <option value="Huron University USA in London">Huron University USA in London</option>
+         <option value="Heriot-Watt University">Heriot-Watt University</option>
+        <option value="Imperial College London">Imperial College London</option>
+        <option value="ifs University College">ifs University College</option>
+         <option value="Institue of Historical Research, University of London">Institue of Historical Research, University of London</option>
+        <option value="Institute of Commonwealth Studies, University of London">Institute of Commonwealth Studies, University of London</option>
+        <option value="Institute of Education, University of London">Institute of Education, University of London</option>
+         <option value="International Colleges of Islamic Science">International Colleges of Islamic Science</option>
+        <option value="King's College London, University of London">King's College London, University of London</option>
+        <option value="Keele University">Keele University</option>
+         <option value="Kingston University">Kingston University</option>
+        <option value="University of Wales, Lampeter">University of Wales, Lampeter</option>
+        <option value="University of Lancaster">University of Lancaster</option>
+        <option value="Loughborough University">Loughborough University</option>
+        <option value="London Business School">London Business School</option>
+        <option value="London College of Science & Technology">London College of Science & Technology</option>
+        <option value="University of Leicester">University of Leicester</option>
+        <option value="University of Leeds">University of Leeds</option>
+        <option value="London Guildhall University">London Guildhall University</option>
+        <option value="London Institute of Management and Technology">London Institute of Management and Technology</option>
+        <option value="University of Lincoln">University of Lincoln</option
+        <option value="University of Liverpool">University of Liverpool</option>
+        <option value="Liverpool John Moores University">Liverpool John Moores University</option>
+        <option value="Leeds Metropolitan University">Leeds Metropolitan University</option>
+        <option value="University of London">University of London</option>
+        <option value="London Metropolitan University">London Metropolitan University</option>
+        <option value="London School of Business & Finance">London School of Business & Finance</option>
+        <option value="London School of Economics and Political Science, University of London">London School of Economics and Political Science, University of London</option>
+        <option value="London School of Hygiene & Tropical Medicine, University of London">London School of Hygiene & Tropical Medicine, University of London</option>
+        <option value="University of Manchester">University of Manchester</option>
+        <option value="Middlesex University">Middlesex University</option>
+        <option value="Imperial College School of Medicine">Imperial College School of Medicine</option>
+        <option value="The Manchester Metropolitan University">The Manchester Metropolitan University</option>
+        <option value="Napier University">Napier University</option>
+        <option value="University of Newcastle-upon-Tyne">University of Newcastle-upon-Tyne</option>
+        <option value="University of Wales, Newport">University of Wales, Newport</option>
+        <option value="Newport International University">Newport International University</option>
+        <option value="University of Northampton">University of Northampton</option>
+        <option value="University of Nottingham">University of Nottingham</option>
+        <option value="Nottingham Trent University">Nottingham Trent University</option>
+        <option value="Open University">Open University</option>
+        <option value="University of Oxford">University of Oxford</option>
+        <option value="University of Paisley">University of Paisley</option>
+        <option value="University of Plymouth">University of Plymouth</option>
+        <option value="University of Portsmouth">University of Portsmouth</option>
+        <option value="Queen Mary, University of London">Queen Mary, University of London</option>
+        <option value="The Queen's University Belfast">The Queen's University Belfast</option>
+        <option value="Royal Academy of Music, University of London">Royal Academy of Music, University of London</option>
+        <option value="Royal College of Art">Royal College of Art</option>
+        <option value="Royal College of Music, University of London">Royal College of Music, University of London</option>
+        <option value="University of Reading">University of Reading</option>
+        <option value="Royal Free Hospital School of Medicine, University of London">Royal Free Hospital School of Medicine, University of London</option>
+        <option value="The Robert Gordon University">The Robert Gordon University</option>
+        <option value="Royal Holloway and Bedford New College">Royal Holloway and Bedford New College</option>
+        <option value="Richmond University - The American International University in London">Richmond University - The American International University in London</option>
+        <option value="Roehampton University of Surrey">Roehampton University of Surrey</option>
+        <option value="University of Salford">University of Salford</option>
+        <option value="Institute of Advanced Legal Studies, University of London">Institute of Advanced Legal Studies, University of London</option>
+        <option value="Institute of Classical Studies, University of London">Institute of Classical Studies, University of London</option>
+        <option value="Institute of Germanic Studies, University of London">Institute of Germanic Studies, University of London</option>
+        <option value="Institute of Latin American Studies, University of London">Institute of Latin American Studies, University of London</option>
+        <option value="Warburg Institute, University of London">Warburg Institute, University of London</option>
+        <option value="South Bank University">South Bank University</option>
+        <option value="Schiller International University, London">Schiller International University, London</option>
+        <option value="Stratford College London">Stratford College London</option>
+        <option value="Saint George's Hospital Medical School, University of London">Saint George's Hospital Medical School, University of London</option>
+        <option value="University of Sheffield">University of Sheffield</option>
+        <option value="Sheffield Hallam University">Sheffield Hallam University</option>
+        <option value="Swansea Metropolitan University">Swansea Metropolitan University</option>
+        <option value="School of Oriental and African Studies, University of London">School of Oriental and African Studies, University of London</option>
+        <option value="Southampton Solent University">Southampton Solent University</option>
+        <option value="Sotheby´s Institute of Art - London">Sotheby´s Institute of Art - London</option>
+        <option value="University of Southampton">University of Southampton</option>
+        <option value="School of Slavonic and East European Studies, University of London">School of Slavonic and East European Studies, University of London</option>
+        <option value="Staffordshire University">Staffordshire University</option>
+        <option value="University of St. Andrews">University of St. Andrews</option>
+        <option value="University of Stirling">University of Stirling</option>
+        <option value="St.Patrick's International College, London">St.Patrick's International College, London</option>
+        <option value="University of Strathclyde">University of Strathclyde</option>
+        <option value="University of Sunderland">University of Sunderland"</option>
+        <option value="University of Surrey">University of Surrey</option>
+        <option value="University of Sussex">University of Sussex</option>
+        <option value="University of Wales, Swansea">University of Wales, Swansea</option>
+        <option value="Trinity College of Music">Trinity College of Music</option>
+        <option value="University of Teesside">University of Teesside</option>
+        <option value="Trinity College Carmarthen">Trinity College Carmarthen</option>
+        <option value="Thames Valley University">Thames Valley University</option>
+        <option value="University College London, University of London">University College London, University of London</option>
+        <option value="University of Central Lancashire">University of Central Lancashire</option>
+        <option value="University Campus Suffolk">University Campus Suffolk</option>
+        <option value="University of East London">University of East London</option>
+        <option value="University of Kent at Canterbury">University of Kent at Canterbury</option>
+        <option value="School of Pharmacy, University of London">School of Pharmacy, University of London</option>
+        <option value="University of Ulster">University of Ulster</option>
+        <option value="United Medical and Dental Schools, University of London">United Medical and Dental Schools, University of London</option>
+        <option value="University of North London">University of North London</option>
+        <option value="University of Northumbria at Newcastle">University of Northumbria at Newcastle</option>
+        <option value="University of Wales College of Medicine">University of Wales College of Medicine</option>
+        <option value="University of the West of England, Bristol">University of the West of England, Bristol</option>
+        <option value="University of Wales Institute, Cardiff">University of Wales Institute, Cardiff</option>
+        <option value="University of Wales">University of Wales</option>
+        <option value="Warnborough University">Warnborough University</option>
+        <option value="University of Warwick">University of Warwick</option>
+        <option value="University of Westminster">University of Westminster</option>
+        <option value="William Gilbert College">William Gilbert College</option>
+        <option value="Wimbledon School of Art">Wimbledon School of Art</option>
+        <option value="University of Wolverhampton">University of Wolverhampton</option>
+        <option value="University of Worcester">University of Worcester</option>
+        <option value="University of York">Opel</option>
+        </select>
+
+        <button type="submit">Login</button>
+
+    </form>
+    <a href="/">Home</a>
+</div>
+
+</html>
