@@ -23,7 +23,7 @@
 <th>{{dueDate}}</th>
 <th>{{completionDate}}</th>
 <th><form action = "/del" method = "post"><input type="hidden" class = "id" id="id" name="id" value={{module_id}}><button name = "del" id = "del" class="delete" val = {{module_id}}>Delete</form></th>
-<th><form action = "/mod" method = "post"><input type="hidden" class = "id" id="id" name="id" value={{module_id}}><button name = "mod" id = "mod" class="modify" val = {{module_id}}>Modify</form></th>
+<th><form action = "/mod" method = "post"><button name = "mod" id = "mod" class="modify" val = {{module_id}}>Modify</form></th>
 </tr>
 {{/ff}}
 </table>

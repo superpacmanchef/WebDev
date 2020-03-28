@@ -8,6 +8,7 @@ let daoUser = new DAOUser(dbFileUser);
 var milestones = 0 ; 
 var sessionData;
 var no = 0;
+var findabetterway ;
 var module ;
 
 
@@ -47,10 +48,11 @@ controller.get('/add/milestones', function(req, res) {
     
 });
 
-controller.get('/mod', function(req, res) {
-    res.render('mod'); 
+controller.get('/module', function(req, res) {
+    res.redirect('/add');
+    console.log("ss");
+    
 });
-
 
 
 
@@ -58,13 +60,16 @@ controller.get('/mod', function(req, res) {
 
 //TODO : NO DUPES
 controller.post('/register', function(req, res) {
+    const fname = req.body.fname;
+    const sname = req.body.sname;
     const uname = req.body.uname;
     const pword = req.body.psw;
     const pwordR = req.body.pswR;
+    const course = req.body.course;
     const uni = req.body.unis;
 
     if (pword == pwordR) {
-        daoUser.insertUser(uname, pword , uni);
+        daoUser.insertUser(fname, sname, uname, pword , course, uni);
         return res.redirect('/');
     }
 
@@ -133,11 +138,8 @@ controller.post('/add/milestones', function(req, res) {
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
     daoUser.removeModule(sessionData , module_id) ;
-
     res.redirect('/home') ; 
 
 });
-
-
 
 module.exports = controller;

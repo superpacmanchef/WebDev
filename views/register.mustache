@@ -1,18 +1,48 @@
 <html>
 
 
-<h1>REGISTER</h1>
+
+
 <div id="register">
     <form action="/register" method=POST>
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+<div id = "register" class="modal-contents">
+        <h1>REGISTER</h1>
 
-        <label for="psw"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Re - Enter Password" name="pswR" required>
+        <div class="form-group">
+        <label for="fname"><b>Firstname</b></label> <br>
+        <input type="text" placeholder="Firstname" name="fname" required> <br>
+        </div>
 
+         <div class="form-group">
+        <label for="sname"><b>Surname</b></label> <br>
+        <input type="text" placeholder="Firstname" name="sname" required> <br>
+        </div>
+
+        <div class="form-group">
+        <label for="uname"><b>Username</b></label> <br>
+        <input type="text" placeholder="Enter Username" name="uname" required> <br>
+        </div>
+        
+
+        <div class="form-group">
+        <label for="psw"><b>Password</b></label> <br>
+        <input type="password" placeholder="Enter Password" name="psw" required> <br>
+        </div>
+
+        <div class="form-group">
+        <label for="psw"><b>Repeat Password</b></label> <br>
+        <input type="password" placeholder="Re - Enter Password" name="pswR" required> <br>
+        </div>
+
+        <div class="form-group">
+        <label for="course"><b>Course</b></label> <br>
+        <input type="text" placeholder="Firstname" name="course" required> <br>
+        </div>
+
+
+         <br> 
+        <div class="form-group">
         <label for="unis">Universities : </label>
         <select name="unis" id="unis">
         <option value="University of Aberdeen">University of Aberdeen</option>
@@ -185,10 +215,36 @@
         <option value="University of York">Opel</option>
         </select>
 
-        <button type="submit">Login</button>
+        </div>
+
+        <div class="form-group">
+        <button type="submit">Register</button>
+        </div>
+
+        <a href="/">Home</a>
+    </div>
 
     </form>
-    <a href="/">Home</a>
+
+
+
 </div>
+
+<style> 
+        .modal-contents { 
+        height: 500px;
+        width: 250px;
+        background-color: white;
+        text-align: center;
+        padding: 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        margin-top: 225px;
+        margin-left: auto;
+        margin-right: auto;
+        } 
+
+</style>
 
 </html>

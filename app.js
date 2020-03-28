@@ -18,6 +18,7 @@ app.use(express.static(staticPath));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/' , controller);
+
 app.listen(app.get('port') , function(){
     console.log("server styarted");
 })

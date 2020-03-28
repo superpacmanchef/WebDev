@@ -1,0 +1,17 @@
+html {
+    background-color: rgb(0, 0, 0);
+}
+
+.modal-contents {
+    height: 500px;
+    width: 400px;
+    background-color: white;
+    text-align: center;
+    padding: 45px;
+    border-radius: 4px;
+    border: 2px;
+    border-style: solid;
+    position: absolute;
+    top: 250px;
+    right: 250px;
+  }

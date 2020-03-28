@@ -27,10 +27,13 @@ class  DAO  {
         })
     }
 
-    insertUser(username, passowrd , uni) {        
+    insertUser(firstname, surname, username, passowrd , course , uni) {        
         this.db.insert({
+            firstname: firstname,
+            surname: surname, 
             username: username,
             passowrd: passowrd,
+            course: course,
             uni: uni,
             module: []
         })
@@ -39,6 +42,8 @@ class  DAO  {
     updateModule(id, module) {
         this.db.update({ _id: id }, { $push: { module: module } }, {}, function() {});
     }
+
+ 
 
     findModule( id , module_id) {
         return new Promise((resolve, reject) => {
@@ -64,11 +69,14 @@ class  DAO  {
     removeModule(id , module_id){
         var t = this.findModule(id , module_id) ; 
         t.then((x) => {
+            console.log(x) ;
             this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {console.log(numRemoved)});})
         
     }
 
-    
+
+
+
     searchByName(uname) {
         return new Promise((resolve, reject) => {
             this.db.findOne({ username: uname }, function(err, entries) {
@@ -81,6 +89,7 @@ class  DAO  {
             });
         })
     }
+    
     searchByID(id) {
         return new Promise((resolve, reject) => {
             this.db.findOne({ _id: id }, function(err, entries) {
