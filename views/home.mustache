@@ -24,6 +24,7 @@
 <th>{{completionDate}}</th>
 <th><form action = "/del" method = "post"><input type="hidden" class = "id" id="id" name="id" value={{module_id}}><button name = "del" id = "del" class="delete" val = {{module_id}}>Delete</form></th>
 <th><form action = "/mod" method = "post"><button name = "mod" id = "mod" class="modify" val = {{module_id}}>Modify</form></th>
+<th><form action = "/alp" method = "post"><button name = "alp" id = "alp" class="alpha" val = {{module_id}}>Alpha</form></th>
 </tr>
 {{/ff}}
 </table>
@@ -31,5 +32,13 @@
 <form action="/add" method="get">
     <input type="Submit" value="Add" name="Add" id="Add" />
 </form>
+
+<style>
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+</style>
 </body>
 <html>

@@ -142,4 +142,36 @@ controller.post('/del', function(req, res) {
 
 });
 
+
+controller.post('/alp', function(req, res) {
+    var projectTitleA = new Array();
+    var moduleArray = new Array();
+
+    var x = 0;
+    var i = 0
+    var data = daoUser.searchByID(sessionData);
+    
+    data.then((data) => {
+
+        for(x; x < data.module.length; x++) {
+           var pushingProject = data.module[x].projectTitle
+           projectTitleA.push(pushingProject);
+           console.log(projectTitleA);
+        }
+
+
+    projectTitleA.sort();
+
+    for(i; i < data.module.length; i++) {
+        if(data.module[i].projectTitle = projectTitleA[i]) {
+            moduleArray = data.module[i];
+            console.log(moduleArray);
+        }
+    }
+    })
+
+    res.redirect('/home') ; 
+});
+
+
 module.exports = controller;
