@@ -30,7 +30,6 @@ controller.get('/home', function(req, res) {
     no = 0;
     milestone = 0 ;
     findabetterway = null;
-    console.log(array);
     if(array == null){
         
     var t = daoUser.searchByID(sessionData);
@@ -40,6 +39,7 @@ controller.get('/home', function(req, res) {
 
         } else { 
             res.render('home', { "uname": entry.username ,
+                                  "course": entry.course,
                                 "ff" : entry.module });
         }
     })
@@ -59,7 +59,6 @@ controller.get('/add/milestones', function(req, res) {
 
 controller.get('/module', function(req, res) {
     res.redirect('/add');
-    console.log("ss");
     
 });
 
@@ -154,7 +153,6 @@ controller.post('/del', function(req, res) {
 
 controller.post('/home', function(req, res) {
     if(array != null){
-        console.log("ar");
         array = null ;
         res.redirect('/home');
     }else {
