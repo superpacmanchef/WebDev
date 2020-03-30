@@ -39,11 +39,11 @@ class  DAO  {
         })
     }
 
+
+
     updateModule(id, module) {
         this.db.update({ _id: id }, { $push: { module: module } }, {}, function() {});
     }
-
- 
 
     findModule( id , module_id) {
         return new Promise((resolve, reject) => {

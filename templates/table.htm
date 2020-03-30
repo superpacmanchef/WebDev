@@ -1,0 +1,22 @@
+<html>
+
+<script id="tables" type="text/html">
+    <tr>
+        <th>Project Title</th>
+        <th>Module Name </th>
+        <th>Submission Date</th>
+        <th>Completion Date </th>
+        </tr>
+        {{#module}}
+        <tr>
+        <td>{{projectTitle}}</td>
+        <td>{{moduleName}}</td>
+        <td>{{dueDate}}</td>
+        <td>{{completionDate}}</td>
+        <td><button name = "del"  class="delete" >Delete</button></td>
+        <td ><button name = "mod"  class="modify">Modify</button></td>
+        </tr>
+        {{/module}}
+</div>
+</script>
+

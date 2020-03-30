@@ -18,10 +18,6 @@ controller.get("/", function(req, res) {
     res.render('login');
 });
 
-controller.get("/add", function(req, res) {
-    res.render('add');
-});
-
 controller.get('/register', function(req, res) {
     res.render('register');
 });
@@ -30,37 +26,23 @@ controller.get('/home', function(req, res) {
     no = 0;
     milestone = 0 ;
     findabetterway = null;
-    if(array == null){
+  
         
     var t = daoUser.searchByID(sessionData);
 
     t.then((entry) => {
         if (entry.username == null) {
 
-        } else { 
+        } else {
             res.render('home', { "uname": entry.username ,
-                                  "course": entry.course,
-                                "ff" : entry.module });
+                                  "course": entry.course
+                               });
         }
     })
-}else {
-    res.render('home', { "uname": array.username ,
-    "ff" : array.module });
-}
+
     
 });
 
-controller.get('/add/milestones', function(req, res) {
-    no++ ;
-    res.render('milestoneAdd' , {'step' : no}) ; 
-    
-    
-});
-
-controller.get('/module', function(req, res) {
-    res.redirect('/add');
-    
-});
 
 
 
@@ -113,34 +95,26 @@ controller.post('/', function(req, res) {
 });
 
 controller.post('/add', function(req, res) {
+    findabetterway = Math.floor(Math.random() * 101) ;  
     var dueDate = req.body.dueDate;
     var moduleName = req.body.mName;
     var projectTitle = req.body.projectTitle ; 
-    milestones = req.body.noOfMilestones ;
-    findabetterway = Math.floor(Math.random() * 101) ;  
-    module = {"moduleName" : moduleName , "dueDate" : dueDate , "milestones" : [] , "projectTitle" : projectTitle , "module_id" : findabetterway}; //TEMP
-
-    res.redirect('/add/milestones');
-      
-    
-        
+    var milestones = req.body.milestones ; 
+    module = {"moduleName" : moduleName , "dueDate" : dueDate , "milestones" : milestones,"projectTitle" : projectTitle , "module_id" : findabetterway}; //TEMP
+    daoUser.updateModule(sessionData , module);
 })
 
-controller.post('/add/milestones', function(req, res) {
-    
-    var desc = req.body.milestoneDesc;
-    var milestoneID = Math.floor(Math.random() * 101) ; //TEMP
-    var milestone = {"Desc" : desc , "completed" : false , "milestoneStep" : no ,"milestone_id" : milestoneID } ; 
-    module.milestones[no - 1] = milestone ; 
 
-    
 
-    if( no < milestones){
-    res.redirect('/add/milestones'); 
-    }else {
-        daoUser.updateModule(sessionData, module) ; 
-        res.redirect('/home')}
 
+
+
+
+controller.post('/getModules' , function(req,res){
+    var data = daoUser.searchByID(sessionData);
+    data.then((data) => {
+        res.send(data);
+    })
 })
 
 controller.post('/del', function(req, res) {
@@ -150,45 +124,68 @@ controller.post('/del', function(req, res) {
 
 });
 
-
-controller.post('/home', function(req, res) {
-    if(array != null){
-        array = null ;
-        res.redirect('/home');
-    }else {
+controller.post('/sort', function(req, res) {
     var projectTitleA = new Array();
     var moduleArray = new Array();
 
-    var x = 0;
-    var i = 0
     var data = daoUser.searchByID(sessionData);
     
     data.then((data) => {
 
-        for(x; x < data.module.length; x++) {
+        for(var x =0; x < data.module.length; x++) {
            var pushingProject = data.module[x].projectTitle
-           projectTitleA.push(pushingProject);
+           projectTitleA.push(pushingProject.toLowerCase());
         }
 
+        projectTitleA.sort();
 
-    projectTitleA.sort();
-
-
-    for(i; i < data.module.length; i++) {
-        if(data.module[i].projectTitle = projectTitleA[i]) {
-            moduleArray[i] = data.module[i];            
+     for(var y = 0 ; y < data.module.length ; y++){
+        for(var i = 0 ; i < data.module.length; i++) {
+            
+            if(data.module[y].projectTitle.toLowerCase() == projectTitleA[i]) {
+            moduleArray[i] = data.module[y];            
+            }
         }
     }
-
-
-    array = data ; 
-    res.redirect('/home');    
+        data.module = moduleArray ;
+        res.send(data);
 
     })
-    }
+    
     
 
 });
+
+controller.post('/sortD', function(req, res) {
+    var projectTitleA = new Array();
+    var moduleArray = new Array();
+
+    var data = daoUser.searchByID(sessionData);
+
+    data.then((data) => {
+        
+        for(var x = 0; x < data.module.length; x++) {
+            var pushingProject = data.module[x].projectTitle;
+            projectTitleA.push(pushingProject.toLowerCase());
+            console.log(projectTitleA);
+        }
+
+        projectTitleA.reverse();
+        console.log(projectTitleA);
+
+        for(var y=0; y < data.module.length ; y++) {
+            for(var i = 0; i < data.module.length; i++) {
+                if(data.module[y].projectTitle.toLowerCase() == projectTitleA[i]) {
+                    moduleArray[i] = data.module[y]
+                }
+            }
+        }
+
+        data.module = moduleArray;
+        res.send(data);
+    })
+
+})
 
 controller.post('/log', function(req, res) {
     res.redirect('/');
