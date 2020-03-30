@@ -4,40 +4,102 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="j.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
+<script src="regular.js"></script>
 </head>
 <h1>{{uname}}</h1>
+<h1>{{course}}</h1>
+
+
+<form action="/log" method="post">
+    <input type="Submit" value="Logout" name="Log" id="Log" />
+</form>
+
 <body>
 
-<table border="1">
-<tr>
-<th>Project Title</th>
-<th>Module Name </th>
-<th>Submission Date</th>
-<th>Completion Date </th>
-</tr>
-{{#ff}}
-<tr>
-<th>{{projectTitle}}</th>
-<th>{{moduleName}}</th>
-<th>{{dueDate}}</th>
-<th>{{completionDate}}</th>
-<th><form action = "/del" method = "post"><input type="hidden" class = "id" id="id" name="id" value={{module_id}}><button name = "del" id = "del" class="delete" val = {{module_id}}>Delete</form></th>
-<th><form action = "/mod" method = "post"><button name = "mod" id = "mod" class="modify" val = {{module_id}}>Modify</form></th>
-<th><form action = "/home" method = "post"><button name = "alp" id = "alp" class="alpha" val = {{module_id}}>Alpha</form></th>
-</tr>
-{{/ff}}
+
+<table id = "modules" border="1">
+ <button name="alp" id="alp" class="alpha">Alpha</button>
 </table>
 
-<form action="/add" method="get">
-    <input type="Submit" value="Add" name="Add" id="Add" />
-</form>
+ <input type="Submit" value="New Add" name="newAdd" id="newAdd" />
+
+  <div id = "Adding" class="modal-Adding">
+        <h1> Add a new Project </h1>
+        <div class="close">+</div>
+  <div class="form-row">
+    <div class="col">
+    <label for="Module Name">Module Name</label>
+    <input type="text" id="mName" name="mName">
+    </div>
+    <div class="col">
+    <label for="Project Title">Project Title</label>
+    <input type="text" id="projectTitle" name="projectTitle">
+    </div>
+    </div>
+    <div class="form-row">
+    <div class="col">
+    <label for="noOfMilestones">No. of MileStones</label><br>
+    <select name="noOfMilestones" id="noOfMilestones">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    </select>
+    </div>
+    <div class="col">
+    <label for="dueDate">Due Date</label><br>
+    <input type="text" id="dueDate" name="dueDate"><br>
+  </div>
+  </div>
+    <br>
+    <button class="btn btn-secondary" type:"submit" id="addProject">Add New Project</button>
 
 <style>
 
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
+    .modal-Adding { 
+        z-index: 4;
+        height: 275px;
+        width: 500px;
+        background-color: white;
+        text-align: center;
+        padding: 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        position: absoloute;
+        margin-top: -250px;
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+        } 
+
+        .modal-Adding h1 {
+            margin-top: -20px;
+        }
+
+        #addProject {
+            position: relative;
+            margin-top: -5px;
+            float: right;
+        }
+
+        .close {
+            position: relative;
+            top: -75px;
+            left: 35px;
+            transform: rotate(45deg);
+            font-size: 40px;
+            color: black;
+            cursor: pointer;
+                }
 
 </style>
 </body>
