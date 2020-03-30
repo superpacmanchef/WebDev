@@ -190,4 +190,8 @@ controller.post('/home', function(req, res) {
 
 });
 
+controller.post('/log', function(req, res) {
+    res.redirect('/');
+})
+
 module.exports = controller;
