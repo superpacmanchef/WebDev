@@ -4,7 +4,8 @@ mustache = require("mustache-express"),
 controller = require('./Controller/controller.js') ; 
 
 var app = express();
-
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // for parsing application/json
 app.set('port' , process.env.PORT || 3000);
 app.engine('mustache' , mustache()) ; 
 
