@@ -5,29 +5,21 @@ let DAOUser = require('../Model/users.js');
 var dbFileUser = 'User.nedb.db';
 let daoUser = new DAOUser(dbFileUser);
 
-var milestones = 0 ; 
 var sessionData;
-var no = 0;
-var findabetterway ;
-var module ;
-var array = null ;
 
 
-
+//renders Login Page
 controller.get("/", function(req, res) {
     res.render('login');
 });
 
+//Renders Register Page
 controller.get('/register', function(req, res) {
     res.render('register');
 });
 
+//Renders Home Page
 controller.get('/home', function(req, res) {
-    no = 0;
-    milestone = 0 ;
-    findabetterway = null;
-  
-        
     var t = daoUser.searchByID(sessionData);
 
     t.then((entry) => {
@@ -67,6 +59,18 @@ controller.post('/register', function(req, res) {
     res.end();
 });
 
+controller.post('/add', function(req, res) {
+    findabetterway = Math.floor(Math.random() * 101) ;  
+    var dueDate = req.body.dueDate;
+    var moduleName = req.body.mName;
+    var projectTitle = req.body.projectTitle ; 
+    var milestones = req.body.milestones ; 
+    module = {"moduleName" : moduleName , "dueDate" : dueDate , "milestones" : milestones,"projectTitle" : projectTitle , "module_id" : findabetterway}; //T0DO - NO DUPES
+    daoUser.updateModule(sessionData , module);
+    res.end();
+})
+/////////////////
+
 controller.post('/', function(req, res) {
     const uname = req.body.uname;
     const pword = req.body.psw;
@@ -87,22 +91,13 @@ controller.post('/', function(req, res) {
             }
         })
         .catch((err) => {
-            console.log(err + "67");
+        
             res.end();
         });
 
 
 });
 
-controller.post('/add', function(req, res) {
-    findabetterway = Math.floor(Math.random() * 101) ;  
-    var dueDate = req.body.dueDate;
-    var moduleName = req.body.mName;
-    var projectTitle = req.body.projectTitle ; 
-    var milestones = req.body.milestones ; 
-    module = {"moduleName" : moduleName , "dueDate" : dueDate , "milestones" : milestones,"projectTitle" : projectTitle , "module_id" : findabetterway}; //TEMP
-    daoUser.updateModule(sessionData , module);
-})
 
 
 
@@ -119,7 +114,6 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
-    console.log(module_id);
     daoUser.removeModule(sessionData , module_id) ;
     res.redirect('/home') ; 
 
@@ -168,11 +162,10 @@ controller.post('/sortD', function(req, res) {
         for(var x = 0; x < data.module.length; x++) {
             var pushingProject = data.module[x].projectTitle;
             projectTitleA.push(pushingProject.toLowerCase());
-            console.log(projectTitleA);
         }
 
+        projectTitleA.sort();
         projectTitleA.reverse();
-        console.log(projectTitleA);
 
         for(var y=0; y < data.module.length ; y++) {
             for(var i = 0; i < data.module.length; i++) {
@@ -219,6 +212,7 @@ controller.post('/sortEDueDate', function(req, res){
 })
 
 controller.post('/log', function(req, res) {
+    sessionData = null ; 
     res.redirect('/');
 })
 
