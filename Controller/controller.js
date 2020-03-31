@@ -119,6 +119,7 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
+    console.log(module_id);
     daoUser.removeModule(sessionData , module_id) ;
     res.redirect('/home') ; 
 
@@ -155,6 +156,67 @@ controller.post('/sort', function(req, res) {
     
 
 });
+
+controller.post('/sortD', function(req, res) {
+    var projectTitleA = new Array();
+    var moduleArray = new Array();
+
+    var data = daoUser.searchByID(sessionData);
+
+    data.then((data) => {
+        
+        for(var x = 0; x < data.module.length; x++) {
+            var pushingProject = data.module[x].projectTitle;
+            projectTitleA.push(pushingProject.toLowerCase());
+            console.log(projectTitleA);
+        }
+
+        projectTitleA.reverse();
+        console.log(projectTitleA);
+
+        for(var y=0; y < data.module.length ; y++) {
+            for(var i = 0; i < data.module.length; i++) {
+                if(data.module[y].projectTitle.toLowerCase() == projectTitleA[i]) {
+                    moduleArray[i] = data.module[y]
+                }
+            }
+        }
+
+        data.module = moduleArray;
+        res.send(data);
+    })
+})
+
+controller.post('/sortEDueDate', function(req, res){
+    var EarliestDueDateA = new Array();
+    var moduleArray = new Array();
+
+    var data = daoUser.searchByID(sessionData);
+
+    data.then((data) => {
+        
+        for(var x = 0; x < data.module.length; x++) {
+            var pushingProject = data.module[x].dueDate;
+            EarliestDueDateA.push(pushingProject);
+        }
+
+        console.log(EarliestDueDateA);
+        EarliestDueDateA.sort(); 
+        console.log(EarliestDueDateA);
+
+        for(var y = 0; y < data.module.length; y++){
+            for(var i = 0; i < data.module.length; i++) {
+                if(data.module[y].dueDate == EarliestDueDateA[i]) {
+                    moduleArray[i] = data.module[y]
+                }
+            }
+        }
+
+        data.module = moduleArray;
+        res.send(data);
+
+    })
+})
 
 controller.post('/log', function(req, res) {
     res.redirect('/');
