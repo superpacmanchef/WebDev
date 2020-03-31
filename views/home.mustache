@@ -21,13 +21,16 @@
 
 
 <table id = "modules" border="1">
- <button name="alp" id="alp" class="alpha">Project Title Ascending Order</button>
 </table>
 
 
-<button name="desc" id="desc" class="Desc">Project Title Descending Order</button>
-<button name="late" id="early" class="EarliestD">Earliest Due Date</button>
-<button name="early" id="late" class="LatestD">Latest Due Date</button>
+<select id="sort">
+  <option value="0" selected>Latest Inputed</option>    
+  <option value="1">Alphabetical</option>
+  <option value="2">Reverse Alphabetical</option>
+  <option value="3">Earliest Due Date</option>
+  <option value="4">Lastest Due Date</option>
+</select>
 
  <input type="Submit" value="New Add" name="newAdd" id="newAdd" />
 
