@@ -27,7 +27,7 @@ class  DAO  {
         })
     }
 
-    insertUser(firstname, surname, username, passowrd , course , uni) {        
+    insertUser(firstname, surname, username, passowrd , course , uni ,id) {        
         this.db.insert({
             firstname: firstname,
             surname: surname, 
@@ -35,11 +35,10 @@ class  DAO  {
             passowrd: passowrd,
             course: course,
             uni: uni,
-            module: []
+            module: [],
+            _id : id
         })
     }
-
-
 
     updateModule(id, module) {
         this.db.update({ _id: id }, { $push: { module: module } }, {}, function() {});
@@ -69,30 +68,21 @@ class  DAO  {
     removeModule(id , module_id){
         var t = this.findModule(id , module_id) ; 
         t.then((x) => {
-            console.log(x) ;
-            this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {console.log(numRemoved)});})
+            this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {});})
     }
 
     removeAllModules(id) {
         var t = this.searchByID(id);
         t.then((entries) => {
-            console.log(entries.module.length);
             for(var x = 0; x < entries.module.length; x++) {
-                console.log(x);
                 this.removeModule(id, entries.module[x].module_id);
             }
         })
     }
 
     removeUser(id) {
-        var t = this.searchByID(id);
-        t.then((entries) => {
-            this.db.update({}, {$pull: {_id: id}}, {}, function(err, numRemoved) {console.log(numRemoved)});
-        })
+        this.db.remove({_id : id} , {} , function(err , numRemoved){console.log(numRemoved)});
     }
-
-
-
 
     searchByName(uname) {
         return new Promise((resolve, reject) => {
