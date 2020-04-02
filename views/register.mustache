@@ -1,22 +1,56 @@
 <html>
+<head>
+<title>Register Account</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style> 
+        .modal-contents { 
+        height: 720px;
+        width: 250px;
+        background-color: white;
+        text-align: center;
+        padding: 30px 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        } 
 
+        *, ::after, ::before {
+            box-sizing: content-box;
+        }
 
+        .form-group {
+            margin-bottom: 16px;
+        }
 
+        input {
+            font-size: 1rem;
+            width: 250px;
+        }
+
+        select {
+            width: 100%;
+        }
+</style>
+</head>
+<body>
 
 <div id="register">
     <form action="/register" method=POST>
 
 <div id = "register" class="modal-contents">
-        <h1>REGISTER</h1>
+        <h1>Register</h1><br>
 
         <div class="form-group">
         <label for="fname"><b>Firstname</b></label> <br>
-        <input type="text" placeholder="Firstname" name="fname" required> <br>
+        <input type="text" placeholder="Firstname" name="fname" required>
         </div>
 
          <div class="form-group">
         <label for="sname"><b>Surname</b></label> <br>
-        <input type="text" placeholder="Firstname" name="sname" required> <br>
+        <input type="text" placeholder="Surname" name="sname" required> <br>
         </div>
 
         <div class="form-group">
@@ -32,19 +66,19 @@
 
         <div class="form-group">
         <label for="psw"><b>Repeat Password</b></label> <br>
-        <input type="password" placeholder="Re - Enter Password" name="pswR" required> <br>
+        <input type="password" placeholder="Re-Enter Password" name="pswR" required> <br>
         </div>
 
         <div class="form-group">
         <label for="course"><b>Course</b></label> <br>
-        <input type="text" placeholder="Firstname" name="course" required> <br>
+        <input type="text" placeholder="Course" name="course" required> <br>
         </div>
 
 
-         <br> 
         <div class="form-group">
-        <label for="unis">Universities : </label>
+        <label for="unis"><b>Universities:</b></label>
         <select name="unis" id="unis">
+        <option value="" selected>Select University</option>
         <option value="University of Aberdeen">University of Aberdeen</option>
         <option value="University of Wales, Aberystwyth">University of Wales, Aberystwyth</option>
         <option value="University of Abertay Dundee">University of Abertay Dundee</option>
@@ -215,13 +249,13 @@
         <option value="University of York">Opel</option>
         </select>
 
-        </div>
+        </div><br>
 
         <div class="form-group">
-        <button type="submit">Register</button>
+        <button class="btn btn-secondary" type="submit">Register</button>
         </div>
 
-        <a href="/">Home</a>
+        <a href="/">Already Have Account?</a>
     </div>
 
     </form>
@@ -230,21 +264,5 @@
 
 </div>
 
-<style> 
-        .modal-contents { 
-        height: 500px;
-        width: 250px;
-        background-color: white;
-        text-align: center;
-        padding: 45px;
-        border-radius: 25px;
-        border: 2px;
-        border-style: solid;
-        margin-top: 225px;
-        margin-left: auto;
-        margin-right: auto;
-        } 
-
-</style>
-
+</body>
 </html>

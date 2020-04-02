@@ -65,7 +65,7 @@ controller.post('/add', function(req, res) {
     var moduleName = req.body.mName;
     var projectTitle = req.body.projectTitle ; 
     var milestones = req.body.milestones ; 
-    module = {"moduleName" : moduleName , "dueDate" : dueDate , "milestones" : milestones,"projectTitle" : projectTitle , "module_id" : findabetterway}; //T0DO - NO DUPES
+    module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "courseworkCompleted": false, "milestones" : milestones}; //T0DO - NO DUPES
     daoUser.updateModule(sessionData , module);
     res.end();
 })
