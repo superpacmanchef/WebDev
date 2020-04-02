@@ -6,7 +6,7 @@ class  DAO  {
                 
         if  (dbFilePath)  {            
             this.db  =  new  Datastore({  filename:  dbFilePath,  autoload:  true  });            
-            console.log("DB connected to file: ",  dbFilePath);        
+            console.log("\n>>>>> DB connected to file: ",  dbFilePath);        
         } 
         else  {             //in memory 
                          this.db  =  new  Datastore();         }    
@@ -71,7 +71,24 @@ class  DAO  {
         t.then((x) => {
             console.log(x) ;
             this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {console.log(numRemoved)});})
-        
+    }
+
+    removeAllModules(id) {
+        var t = this.searchByID(id);
+        t.then((entries) => {
+            console.log(entries.module.length);
+            for(var x = 0; x < entries.module.length; x++) {
+                console.log(x);
+                this.removeModule(id, entries.module[x].module_id);
+            }
+        })
+    }
+
+    removeUser(id) {
+        var t = this.searchByID(id);
+        t.then((entries) => {
+            this.db.update({}, {$pull: {_id: id}}, {}, function(err, numRemoved) {console.log(numRemoved)});
+        })
     }
 
 

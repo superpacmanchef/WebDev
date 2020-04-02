@@ -9,57 +9,95 @@
 
 <script src="regular.js"></script>
 </head>
+<body>
+
 <h1>{{uname}}</h1>
 <h1>{{course}}</h1>
 
+<br>
+<input type="Submit" value="Add New Project" name="newAdd" id="newAdd"/>
+
+<select id="sort">
+  <option value="0" selected>Latest Inputed</option>    
+  <option value="1">Alphabetical</option>
+  <option value="2">Reverse Alphabetical</option>
+  <option value="3">Earliest Due Date</option>
+  <option value="4">Lastest Due Date</option>
+</select>
+<br>
+ 
+<hr>
+<table id = "modules" border="1">
+</table>
+<hr>
 
 <form action="/log" method="post">
     <input type="Submit" value="Logout" name="Log" id="Log" />
 </form>
 
-<body>
+<input type="Submit" value="Delete Multiple Projects" name="delMul" id="delMul"/>
 
-
-<table id = "modules" border="1">
- <button name="alp" id="alp" class="alpha">Asce</button>
-</table>
-
-
-<button name="desc" id="desc" class="Desc">Desc</button>
-
- <input type="Submit" value="New Add" name="newAdd" id="newAdd" />
-
-  <div id = "Adding" class="modal-Adding">
-        <h1> Add a new Project </h1>
-        <div class="close">+</div>
-  <div class="form-row">
-    <div class="col">
-    <label for="Module Name">Module Name</label>
-    <input type="text" id="mName" name="mName">
-    </div>
-    <div class="col">
-    <label for="Project Title">Project Title</label>
-    <input type="text" id="projectTitle" name="projectTitle">
-    </div>
+<div id = "Adding" class="modal-Adding">
+    <h1> Add a new Project </h1>
+    <div class="close">+</div>
+    <div class="form-row">
+        <div class="col">
+            <label for="Module Name">Module Name</label>
+            <input type="text" id="mName" name="mName">
+        </div>
+        <div class="col">
+            <label for="Project Title">Project Title</label>
+            <input type="text" id="projectTitle" name="projectTitle">
+        </div>
     </div>
     <div class="form-row">
-    <div class="col">
-    <label for="noOfMilestones">No. of MileStones</label><br>
-    <select name="noOfMilestones" id="noOfMilestones">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    </select>
+        <div class="col">
+            <label for="noOfMilestones">No. of MileStones</label><br>
+            <select name="noOfMilestones" id="noOfMilestones">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="dueDate">Due Date</label><br>
+            <input type="text" id="dueDate" name="dueDate"><br>
+        </div>
     </div>
+    <br><button class="btn btn-secondary" type:"submit" id="addProject">Add New Project</button>
+</div>
+
+<div id = "delMultipleProjets" class="modal-Deleting">
+    <h2> Please Select an Option </h2>
+        <div class="cancel">+</div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="deleteOptionRadios">
+                    <input type="radio" id="CompletedProjects" name="deleteOptions" value="CompletedProjects">
+                    <label for="CompletedProjects"> Select if you wish to delete all CompletedProjects</label><br>
+                    <input type="radio" id="DeleteAllProjects" name="deleteOptions" value="DeleteAllProjects"> 
+                    <label for="DeleteAllProjects"> Select if you wish to delete all projects</label><br>
+                    </div>
+                </div>
+             </div>
+             <button class="btn btn-secondary" type:"submit" id="massDeleteBtn">Delete</button>
+</div>
+
+<div id="delAllProjects" class="modal-del">
+    <h2> Delete Confirmation </h2>
+    <div class="close3">+</div>
+    <div class="form-row>
     <div class="col">
-    <label for="dueDate">Due Date</label><br>
-    <input type="text" id="dueDate" name="dueDate"><br>
-  </div>
-  </div>
-    <br>
-    <button class="btn btn-secondary" type:"submit" id="addProject">Add New Project</button>
+    <div class="modal-del-contents">
+    <p> Are you sure you want to delete all of your projects? <br> If so please enter "Delete" into the input box to proceed </p>
+     <input type="text" id="deleteEntry" name="deleteEntry" placeholder="Delete">
+      <button class="btn btn-secondary" type:"submit" id="delAllProjectsBtn">Delete</button>
+     </div>
+     </div>
+     </div>
+</div>
 
 <style>
 
@@ -67,8 +105,61 @@
         background-color: #dddddd;
     }
 
+    .modal-del {
+         z-index: 1000;
+        height: 250px;
+        width: 400px;
+        background-color: white;
+        text-align: center;
+        padding: 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        position: relative;
+        margin-top: -250px;
+        margin-left: auto;
+        margin-right: auto;
+        display:none;
+    }
+
+    .modal-del-contents {
+        position: relative;
+        top: -60px;
+    }
+
+    .modal-del h2 {
+        margin-top: -20px;
+    }
+
+    .modal-del .form-row {
+        margin-top: -40px;
+    }
+
+    .modal-Deleting { 
+        z-index: 1000;
+        height: 250px;
+        width: 475px;
+        background-color: white;
+        text-align: center;
+        padding: 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        position: relative;
+        margin-top: -250px;
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+        } 
+
+    .deleteOptionRadios {
+        position: relative;
+        margin-top: -40px;
+        float: left;
+    }
+
     .modal-Adding { 
-        z-index: 4;
+        z-index: 1000;
         height: 275px;
         width: 500px;
         background-color: white;
@@ -77,7 +168,7 @@
         border-radius: 25px;
         border: 2px;
         border-style: solid;
-        position: absoloute;
+        position: relative;
         margin-top: -250px;
         margin-left: auto;
         margin-right: auto;
@@ -98,6 +189,26 @@
             position: relative;
             top: -75px;
             left: 35px;
+            transform: rotate(45deg);
+            font-size: 40px;
+            color: black;
+            cursor: pointer;
+                }
+
+         .close3 {
+            position: relative;
+            top: -85px;
+            left: 180px;
+            transform: rotate(45deg);
+            font-size: 40px;
+            color: black;
+            cursor: pointer;
+                }
+
+        .cancel {
+            position: relative;
+            top: -100px;
+            left: 215px;
             transform: rotate(45deg);
             font-size: 40px;
             color: black;

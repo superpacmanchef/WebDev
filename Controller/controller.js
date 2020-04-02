@@ -5,29 +5,21 @@ let DAOUser = require('../Model/users.js');
 var dbFileUser = 'User.nedb.db';
 let daoUser = new DAOUser(dbFileUser);
 
-var milestones = 0 ; 
 var sessionData;
-var no = 0;
-var findabetterway ;
-var module ;
-var array = null ;
 
 
-
+//renders Login Page
 controller.get("/", function(req, res) {
     res.render('login');
 });
 
+//Renders Register Page
 controller.get('/register', function(req, res) {
     res.render('register');
 });
 
+//Renders Home Page
 controller.get('/home', function(req, res) {
-    no = 0;
-    milestone = 0 ;
-    findabetterway = null;
-  
-        
     var t = daoUser.searchByID(sessionData);
 
     t.then((entry) => {
@@ -67,6 +59,18 @@ controller.post('/register', function(req, res) {
     res.end();
 });
 
+controller.post('/add', function(req, res) {
+    findabetterway = Math.floor(Math.random() * 101) ;  
+    var dueDate = req.body.dueDate;
+    var moduleName = req.body.mName;
+    var projectTitle = req.body.projectTitle ; 
+    var milestones = req.body.milestones ; 
+    module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "courseworkCompleted": false, "milestones" : milestones}; //T0DO - NO DUPES
+    daoUser.updateModule(sessionData , module);
+    res.end();
+})
+/////////////////
+
 controller.post('/', function(req, res) {
     const uname = req.body.uname;
     const pword = req.body.psw;
@@ -87,22 +91,13 @@ controller.post('/', function(req, res) {
             }
         })
         .catch((err) => {
-            console.log(err + "67");
+        
             res.end();
         });
 
 
 });
 
-controller.post('/add', function(req, res) {
-    findabetterway = Math.floor(Math.random() * 101) ;  
-    var dueDate = req.body.dueDate;
-    var moduleName = req.body.mName;
-    var projectTitle = req.body.projectTitle ; 
-    var milestones = req.body.milestones ; 
-    module = {"moduleName" : moduleName , "dueDate" : dueDate , "milestones" : milestones,"projectTitle" : projectTitle , "module_id" : findabetterway}; //TEMP
-    daoUser.updateModule(sessionData , module);
-})
 
 
 
@@ -167,11 +162,10 @@ controller.post('/sortD', function(req, res) {
         for(var x = 0; x < data.module.length; x++) {
             var pushingProject = data.module[x].projectTitle;
             projectTitleA.push(pushingProject.toLowerCase());
-            console.log(projectTitleA);
         }
 
+        projectTitleA.sort();
         projectTitleA.reverse();
-        console.log(projectTitleA);
 
         for(var y=0; y < data.module.length ; y++) {
             for(var i = 0; i < data.module.length; i++) {
@@ -184,11 +178,48 @@ controller.post('/sortD', function(req, res) {
         data.module = moduleArray;
         res.send(data);
     })
+})
 
+controller.post('/sortEDueDate', function(req, res){
+    var EarliestDueDateA = new Array();
+    var moduleArray = new Array();
+
+    var data = daoUser.searchByID(sessionData);
+
+    data.then((data) => {
+        
+        for(var x = 0; x < data.module.length; x++) {
+            var pushingProject = data.module[x].dueDate;
+            EarliestDueDateA.push(pushingProject);
+        }
+
+        console.log(EarliestDueDateA);
+        EarliestDueDateA.sort(); 
+        console.log(EarliestDueDateA);
+
+        for(var y = 0; y < data.module.length; y++){
+            for(var i = 0; i < data.module.length; i++) {
+                if(data.module[y].dueDate == EarliestDueDateA[i]) {
+                    moduleArray[i] = data.module[y]
+                }
+            }
+        }
+
+        data.module = moduleArray;
+        res.send(data);
+
+    })
 })
 
 controller.post('/log', function(req, res) {
+    sessionData = null ; 
     res.redirect('/');
 })
+
+controller.post('/delAll', function(res,res) {
+    daoUser.removeAllModules(sessionData);
+
+    res.redirect('/home');
+});
 
 module.exports = controller;
