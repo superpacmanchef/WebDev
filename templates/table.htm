@@ -5,6 +5,7 @@
         <th>Module Name </th>
         <th>Submission Date</th>
         <th>Completion Date </th>
+        <th>Completed?</th>
         </tr>
         {{#module}}
         <tr>
@@ -12,6 +13,7 @@
         <td>{{moduleName}}</td>
         <td>{{dueDate}}</td>
         <td>{{completionDate}}</td>
+        <td>{{courseworkCompleted}}</td>
         <td><button name = "del"   class="delete" value = {{module_id}}  > Delete</button></td>
         <td ><button name = "mod"  class="modify">Modify</button></td>
         </tr>

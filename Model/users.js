@@ -6,7 +6,7 @@ class  DAO  {
                 
         if  (dbFilePath)  {            
             this.db  =  new  Datastore({  filename:  dbFilePath,  autoload:  true  });            
-            console.log("DB connected to file: ",  dbFilePath);        
+            console.log("\n>>>>> DB connected to file: ",  dbFilePath);        
         } 
         else  {             //in memory 
                          this.db  =  new  Datastore();         }    

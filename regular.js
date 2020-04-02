@@ -26,18 +26,24 @@ $(document).ready(function(){
         document.querySelector(".modal-Adding").style.display = "block";
     })
 
+    //Close new module form
+    document.querySelector('.close').addEventListener("click", function() {
+        document.querySelector('.modal-Adding').style.display = "none";
+    });
+
     //Adds new module to database
     $('#addProject').click(function() {
         var projectTitle = $('#projectTitle').val();
         var mName = $('#mName').val();
-        var noOfMilestones = $('#noOfMilesstones').find(':selected').text();
+        var noOfMilestones = $('#noOfMilestones').find(':selected').text();
         var dueDate = $('#dueDate').val();
         var milestones = [] ;
 
-        for (var x = 0 ; x <= noOfMilestones ; x++){
-            var Desc =prompt("DESC" + x + 1 );
+        for (var x = 0 ; x < noOfMilestones ; x++){
+            var milestoneStep = x + 1; //Use 'human' counting, start from 1
+            var Desc = prompt("Description of milestone " + milestoneStep);
             var milestoneID = Math.floor(Math.random() * 101) ; //TEMP
-            milestone = {"Desc" : Desc , "completed" : false , "milestoneStep" : x, "milestone_id" : milestoneID} ;
+            milestone = {"milestone_id" : milestoneID, "Desc" : Desc, "milestoneStep" : x, "milestoneCompleted" : false} ;
             milestones[x] = milestone ; 
         }
 
@@ -213,6 +219,7 @@ function displayTable(json){
         var template = $(templates).filter('#tables').html();
         $('#modules').append(Mustache.render(template,json));
     })
+    console.log(json);
 }
 
 
