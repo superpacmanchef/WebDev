@@ -216,4 +216,10 @@ controller.post('/log', function(req, res) {
     res.redirect('/');
 })
 
+controller.post('/delAll', function(res,res) {
+    daoUser.removeAllModules(sessionData);
+
+    res.redirect('/home');
+});
+
 module.exports = controller;
