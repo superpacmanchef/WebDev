@@ -26,10 +26,27 @@ $(document).ready(function(){
         document.querySelector(".modal-Adding").style.display = "block";
     })
 
+    //Displays Mass Deleting option form
+    $("#delMul").click(function(){
+        document.querySelector(".modal-Deleting").style.display = "block";
+    })
+
     //Close new module form
     document.querySelector('.close').addEventListener("click", function() {
         document.querySelector('.modal-Adding').style.display = "none";
     });
+
+    //Close Mass Deletion option form
+    document.querySelector('.cancel').addEventListener("click", function() {
+        document.querySelector('.modal-Deleting').style.display = "none";
+    });
+
+    //Close Delete All Projects form
+    document.querySelector('.close3').addEventListener("click", function() {
+        document.querySelector('.modal-del').style.display = "none";
+        document.querySelector(".modal-Deleting").style.display = "block";
+    });
+
 
     //Adds new module to database
     $('#addProject').click(function() {
@@ -65,6 +82,48 @@ $(document).ready(function(){
             })
         
         
+    })
+
+
+    $("#massDeleteBtn").click(function(){
+        var radioValue = $("input[name='deleteOptions']:checked").val(); //Get radio button selection
+
+        //Execute something depending on what the user has selected
+        if(radioValue == "CompletedProjects") {
+            alert("Completed Projects")
+        } else if(radioValue == "DeleteAllProjects") {
+            document.querySelector('.modal-Deleting').style.display = "none";
+                document.querySelector(".modal-del").style.display = "block";
+        } else {
+            alert("You didnt select an option")
+        }
+        
+    })
+
+
+    $("#delAllProjectsBtn").click(function(){
+        var deleteValue = $("#deleteEntry").val(); //Get user input
+
+        //Validate that user input matches "delete"
+        if(deleteValue.toLowerCase() == "delete") {
+            //Delete all the projects
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : 'http://localhost:3000/delAll',
+                success : function(){
+                    getSorted();
+                    document.querySelector(".modal-del").style.display = "none";
+                },
+                error : function(error){
+                    console.log("error");
+                }
+            })
+        } else {
+            console.log("Didny dae it");
+        }
+        
+
     })
  
 
