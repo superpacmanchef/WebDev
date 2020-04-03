@@ -71,6 +71,19 @@ class  DAO  {
             this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {});})
     }
 
+    completeModule(id , module_id){
+        console.log(module_id);
+        var y = Number(module_id);
+        this.db.find({module: { $elemMatch: {"module_id": y} }}, function(err , numCompleted) {
+            console.log(err);
+            console.log(numCompleted);
+        });
+
+        //var t = this.findModule(id , module_id) ;
+        //t.then((x) => {
+        //})
+    }
+
     removeAllModules(id) {
         var t = this.searchByID(id);
         t.then((entries) => {
