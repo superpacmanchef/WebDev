@@ -84,6 +84,20 @@ class  DAO  {
         this.db.remove({_id : id} , {} , function(err , numRemoved){console.log(numRemoved)});
     }
 
+    completeModule(id , module_id){
+        var t = this.searchByID(id);
+        t.then((entries) => {
+            for(var x = 0; x < entries.module.length; x++) {
+                if(entries.module[x].module_id == module_id && entries.module[x].courseworkCompleted == false){
+                    this.removeModule(id , module_id);
+                    var g = entries.module[x];
+                    g.courseworkCompleted = true ;
+                    this.updateModule(id , g);
+                }
+            }
+        })     
+    }
+
     searchByName(uname) {
         return new Promise((resolve, reject) => {
             this.db.findOne({ username: uname }, function(err, entries) {
