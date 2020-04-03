@@ -68,11 +68,11 @@ controller.post('/register', function(req, res) {
 
 controller.post('/add', function(req, res) {
     var findabetterway = Math.floor(Math.random() * 101) ; ////////  
-    var dueDate = req.body.dueDate;
+    var projectTitle = req.body.projectTitle;
     var moduleName = req.body.mName;
-    var projectTitle = req.body.projectTitle ; 
-    var milestones = req.body.milestones ;
-    module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "courseworkCompleted": false, "milestones" : milestones}; //T0DO - NO DUPES
+    var dueDate = req.body.dueDate;
+    var milestones = req.body.milestones;
+    module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "completionDate" : "", "courseworkCompleted" : false, "milestones" : milestones}; //T0DO - NO DUPES
     daoUser.updateModule(sessionData , module);
     res.end();
 })
