@@ -60,7 +60,7 @@ $(document).ready(function(){
             var milestoneStep = x + 1; //Use 'human' counting, start from 1
             var Desc = prompt("Description of milestone " + milestoneStep);
             var milestoneID = Math.floor(Math.random() * 101) ; //TEMP
-            milestone = {"milestone_id" : milestoneID, "Desc" : Desc, "milestoneStep" : x, "milestoneCompleted" : false} ;
+            milestone = {"milestone_id" : milestoneID, "Desc" : Desc, "milestoneStep" : milestoneStep, "milestoneCompleted" : false} ;
             milestones[x] = milestone ; 
         }
 
