@@ -71,6 +71,28 @@ class  DAO  {
             this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {});})
     }
 
+    completeModule(id , module_id){
+        var t = this.searchByID(id);
+        t.then((entries) => {
+            for(var x = 0; x < entries.module.length; x++)
+                if(entries.module[x].module_id == module_id && entries.module[x].courseworkCompleted == false) {
+                    this.removeModule(id, module_id);
+                    var g = entries.module[x];
+
+                    var date = new Date();
+                    var formattedDate = ('0' + date.getDate()).slice(-2);
+                    var formattedMonth = ('0' + (date.getMonth() + 1)).slice(-2);
+                    var formattedYear = date.getFullYear().toString().substr(2,2);
+                    var dateString = formattedDate + '/' + formattedMonth + '/' + formattedYear;
+
+                    g.completionDate = dateString;
+                    g.courseworkCompleted = true;
+                    console.log(g);
+                    this.updateModule(id, g);
+                }
+        })
+    }
+
     removeAllModules(id) {
         var t = this.searchByID(id);
         t.then((entries) => {
