@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = express.Router();
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10 ; 
 let DAOUser = require('../Model/users.js');
 var dbFileUser = 'User.nedb.db';
 let daoUser = new DAOUser(dbFileUser);
@@ -48,19 +49,25 @@ controller.post('/register', function(req, res) {
     const pword = req.body.psw;
     const pwordR = req.body.pswR;
     const course = req.body.course;
-    const uni = req.body.unis;
+    const uni = req.body.unis;  
 
-    if (pword == pwordR) {
-        daoUser.insertUser(fname, sname, uname, pword , course, uni);
-        return res.redirect('/');
-    }
+    bcrypt.genSalt(saltRounds , function(err , salt){
+        if(pword == pwordR){
+            bcrypt.hash(pword , saltRounds , (err , hash) => {
+                daoUser.insertUser(fname , sname , uname , hash , course ,uni , salt) ; 
+                res.redirect('/');
+            })
+            }else {
+                
+            }
+    });
 
 
-    res.end();
+
 });
 
 controller.post('/add', function(req, res) {
-    findabetterway = Math.floor(Math.random() * 101) ;  
+    var findabetterway = Math.floor(Math.random() * 101) ; ////////  
     var dueDate = req.body.dueDate;
     var moduleName = req.body.mName;
     var projectTitle = req.body.projectTitle ; 
@@ -69,7 +76,6 @@ controller.post('/add', function(req, res) {
     daoUser.updateModule(sessionData , module);
     res.end();
 })
-/////////////////
 
 controller.post('/', function(req, res) {
     const uname = req.body.uname;
@@ -80,14 +86,14 @@ controller.post('/', function(req, res) {
             if (entry == null) {
                 console.log("none there");
             } else {
-
-                if (entry.passowrd == pword) {
-                    sessionData = entry._id;
-                    res.redirect('/home');
-                } else {
-                    console.log("Username or Password Wrong");
-                    res.redirect('/');
-                }
+                bcrypt.compare(pword , entry.passowrd , function(err,result){
+                    if(result){
+                        sessionData = entry._id ;
+                        res.redirect('/home');
+                    }else {
+                        res.send("bums");
+                    }
+                })
             }
         })
         .catch((err) => {
@@ -225,8 +231,7 @@ controller.post('/log', function(req, res) {
 
 controller.post('/delAll', function(res,res) {
     daoUser.removeAllModules(sessionData);
-
-    res.redirect('/home');
+    res.end();
 });
 
 module.exports = controller;

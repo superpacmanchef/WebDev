@@ -74,6 +74,7 @@ class  DAO  {
     completeModule(id , module_id){
         console.log(module_id);
         var y = Number(module_id);
+        //this.db.find({module: { $elemMatch: {"module_id": y} }}, function(err , numCompleted) {
         this.db.find({module: { $elemMatch: {"module_id": y} }}, function(err , numCompleted) {
             console.log(err);
             console.log(numCompleted);
