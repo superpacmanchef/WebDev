@@ -234,11 +234,4 @@ controller.post('/delAll', function(res,res) {
     res.end();
 });
 
-controller.post('/completeCW', function(req, res) {
-    const module_id = req.body.id;
-    daoUser.completeModule(sessionData , module_id) ;
-    res.redirect('/home') ; 
-
-});
-
 module.exports = controller;
