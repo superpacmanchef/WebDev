@@ -49,7 +49,7 @@ class  DAO  {
         return new Promise((resolve, reject) => {
             this.db.findOne({module :{$elemMatch : {"module_id": y} }}, function(err , entries) {
                 
-                console.log(entries);
+                console.log(module_id);
                 if (err) {
                     reject(err);
                     console.log(err);
