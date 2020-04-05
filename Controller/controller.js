@@ -37,7 +37,13 @@ controller.get('/home', function(req, res) {
 });
 
 
-
+controller.get('/view', function(req, res) {
+    var q = req.query.view ;
+    var m = daoUser.findModule(q);
+    m.then((module) => {
+        res.render('view' , module);
+    });
+});
 
 
 
@@ -120,7 +126,7 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
-    daoUser.removeModule(sessionData , module_id) ;
+    daoUser.removeModule(module_id) ;
     res.redirect('/home') ; 
 
 });
