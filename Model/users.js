@@ -77,6 +77,7 @@ class  DAO  {
         t.then((entries) => {
             for(var x = 0; x < entries.module.length; x++)
                 if(entries.module[x].module_id == module_id && entries.module[x].courseworkCompleted == false) {
+                    console.log("ass2");
                     this.removeModule(id, module_id);
                     var g = entries.module[x];
 
