@@ -27,12 +27,12 @@ class  DAO  {
         })
     }
 
-    insertUser(firstname, surname, username, passowrd , course , uni ,id) {        
+    insertUser(firstname, surname, username, password , course , uni ,id) {        
         this.db.insert({
             firstname: firstname,
             surname: surname, 
             username: username,
-            passowrd: passowrd,
+            password: password,
             course: course,
             uni: uni,
             module: [],
