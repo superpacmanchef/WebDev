@@ -126,13 +126,12 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
-    daoUser.removeModule(module_id) ;
+    daoUser.removeModule(sessionData, module_id) ;
     res.redirect('/home') ; 
 
 });
 
 controller.post('/completeCW', function(req, res) {
-    console.log("ass3");
     const module_id = req.body.id;
     daoUser.completeModule(sessionData , module_id) ;
     res.redirect('/home') ; 
