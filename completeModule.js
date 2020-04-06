@@ -17,10 +17,9 @@ $(document).ready(function(){
         window.location.replace("http://localhost:3000/view?view=" + t);
     });
 
-    var set = 0;
-
     $('#showCompleted').click(function(){
-        if(set == 0){
+        if($(this).val() == 0 ){
+            document.getElementById('showCompleted').value = 1 ; 
         $.ajax({
             type : "POST",
             contentType : "application/json",
@@ -37,13 +36,12 @@ $(document).ready(function(){
                 var completed = {"module":module};
                 $('#modules').empty();
                 displayTable(completed);
-                set = 1;
-                console.log(completed);
             }
       });
+    }else{
+        document.getElementById('showCompleted').value = 0 ; 
+        getSorted();
     }
-    else{getSorted();
-    set = 0;
-    };
+  
     })
 })
