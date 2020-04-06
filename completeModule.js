@@ -1,6 +1,7 @@
 $(document).ready(function(){
-    //Deletes selected 
+    //Update selected 
     $(document).on("click","#modules tr td button.completeCW", function() {
+        console.log("ass");
         $.ajax({
             type : "POST",
             contentType : "application/json",
@@ -10,10 +11,5 @@ $(document).ready(function(){
                 getSorted();
             }
       });
-    });
-
-    $(document).on("click","#modules tr td button.view", function() {
-        var t  =$(this).val();
-        window.location.replace("http://localhost:3000/view?view=" + t);
     });
 })

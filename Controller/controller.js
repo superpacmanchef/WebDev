@@ -132,6 +132,7 @@ controller.post('/del', function(req, res) {
 });
 
 controller.post('/completeCW', function(req, res) {
+    console.log("ass3");
     const module_id = req.body.id;
     daoUser.completeModule(sessionData , module_id) ;
     res.redirect('/home') ; 
