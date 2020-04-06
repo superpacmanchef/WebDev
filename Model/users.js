@@ -27,12 +27,12 @@ class  DAO  {
         })
     }
 
-    insertUser(firstname, surname, username, passowrd , course , uni ,id) {        
+    insertUser(firstname, surname, username, password , course , uni ,id) {        
         this.db.insert({
             firstname: firstname,
             surname: surname, 
             username: username,
-            passowrd: passowrd,
+            password: password,
             course: course,
             uni: uni,
             module: [],
@@ -49,7 +49,7 @@ class  DAO  {
         return new Promise((resolve, reject) => {
             this.db.findOne({module :{$elemMatch : {"module_id": y} }}, function(err , entries) {
                 
-                console.log(entries);
+                console.log(module_id);
                 if (err) {
                     reject(err);
                     console.log(err);
@@ -66,7 +66,7 @@ class  DAO  {
 
     }
 
-    removeModule(module_id){
+    removeModule(id , module_id){
         var t = this.findModule(module_id) ; 
         t.then((x) => {
             this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {});})

@@ -92,7 +92,7 @@ controller.post('/', function(req, res) {
             if (entry == null) {
                 console.log("none there");
             } else {
-                bcrypt.compare(pword , entry.passowrd , function(err,result){
+                bcrypt.compare(pword , entry.password , function(err,result){
                     if(result){
                         sessionData = entry._id ;
                         res.redirect('/home');
@@ -126,7 +126,7 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
-    daoUser.removeModule(module_id) ;
+    daoUser.removeModule(sessionData, module_id) ;
     res.redirect('/home') ; 
 
 });

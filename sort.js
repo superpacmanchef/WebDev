@@ -153,9 +153,9 @@ function getLatestModules(){
 
 //Takes in Json object and display table using mustcahe templates.
 function displayTable(json){
+    var module = {"module" : json.module};
     $.get('/templates/table.htm' , function(templates) {
         var template = $(templates).filter('#tables').html();
-        $('#modules').append(Mustache.render(template,json));
+        $('#modules').append(Mustache.render(template,module));
     })
-    console.log(json);
 }
