@@ -27,29 +27,29 @@ class  DAO  {
         })
     }
 
-    insertUser(firstname, surname, username, passowrd , course , uni) {        
+    insertUser(firstname, surname, username, password , course , uni ,id) {        
         this.db.insert({
             firstname: firstname,
             surname: surname, 
             username: username,
-            passowrd: passowrd,
+            password: password,
             course: course,
             uni: uni,
-            module: []
+            module: [],
+            _id : id
         })
     }
-
-
 
     updateModule(id, module) {
         this.db.update({ _id: id }, { $push: { module: module } }, {}, function() {});
     }
 
-    findModule( id , module_id) {
+    findModule(module_id) {
+        var y = Number(module_id);
         return new Promise((resolve, reject) => {
-            this.db.findOne({"_id": id }, function(err , entries) {
+            this.db.findOne({module :{$elemMatch : {"module_id": y} }}, function(err , entries) {
                 
-             
+                console.log(module_id);
                 if (err) {
                     reject(err);
                     console.log(err);
@@ -67,32 +67,44 @@ class  DAO  {
     }
 
     removeModule(id , module_id){
-        var t = this.findModule(id , module_id) ; 
+        var t = this.findModule(module_id) ; 
         t.then((x) => {
-            console.log(x) ;
-            this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {console.log(numRemoved)});})
+            this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {});})
+    }
+
+    completeModule(id , module_id){
+        var t = this.searchByID(id);
+        t.then((entries) => {
+            for(var x = 0; x < entries.module.length; x++)
+                if(entries.module[x].module_id == module_id && entries.module[x].courseworkCompleted == false) {
+                    this.removeModule(id, module_id);
+                    var g = entries.module[x];
+
+                    var date = new Date();
+                    var formattedDate = ('0' + date.getDate()).slice(-2);
+                    var formattedMonth = ('0' + (date.getMonth() + 1)).slice(-2);
+                    var formattedYear = date.getFullYear().toString();
+                    var dateString = formattedDate + '/' + formattedMonth + '/' + formattedYear;
+
+                    g.completionDate = dateString;
+                    g.courseworkCompleted = true;
+                    this.updateModule(id, g);
+                }
+        })
     }
 
     removeAllModules(id) {
         var t = this.searchByID(id);
         t.then((entries) => {
-            console.log(entries.module.length);
             for(var x = 0; x < entries.module.length; x++) {
-                console.log(x);
                 this.removeModule(id, entries.module[x].module_id);
             }
         })
     }
 
     removeUser(id) {
-        var t = this.searchByID(id);
-        t.then((entries) => {
-            this.db.update({}, {$pull: {_id: id}}, {}, function(err, numRemoved) {console.log(numRemoved)});
-        })
+        this.db.remove({_id : id} , {} , function(err , numRemoved){console.log(numRemoved)});
     }
-
-
-
 
     searchByName(uname) {
         return new Promise((resolve, reject) => {

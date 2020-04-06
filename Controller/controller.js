@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = express.Router();
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10 ; 
 let DAOUser = require('../Model/users.js');
 var dbFileUser = 'User.nedb.db';
 let daoUser = new DAOUser(dbFileUser);
@@ -36,7 +37,13 @@ controller.get('/home', function(req, res) {
 });
 
 
-
+controller.get('/view', function(req, res) {
+    var q = req.query.view ;
+    var m = daoUser.findModule(q);
+    m.then((module) => {
+        res.render('view' , module);
+    });
+});
 
 
 
@@ -48,28 +55,33 @@ controller.post('/register', function(req, res) {
     const pword = req.body.psw;
     const pwordR = req.body.pswR;
     const course = req.body.course;
-    const uni = req.body.unis;
+    const uni = req.body.unis;  
 
-    if (pword == pwordR) {
-        daoUser.insertUser(fname, sname, uname, pword , course, uni);
-        return res.redirect('/');
-    }
+    bcrypt.genSalt(saltRounds , function(err , salt){
+        if(pword == pwordR){
+            bcrypt.hash(pword , saltRounds , (err , hash) => {
+                daoUser.insertUser(fname , sname , uname , hash , course ,uni , salt) ; 
+                res.redirect('/');
+            })
+            }else {
+                
+            }
+    });
 
 
-    res.end();
+
 });
 
 controller.post('/add', function(req, res) {
-    findabetterway = Math.floor(Math.random() * 101) ;  
-    var dueDate = req.body.dueDate;
+    var findabetterway = Math.floor(Math.random() * 101) ; ////////  
+    var projectTitle = req.body.projectTitle;
     var moduleName = req.body.mName;
-    var projectTitle = req.body.projectTitle ; 
-    var milestones = req.body.milestones ; 
-    module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "courseworkCompleted": false, "milestones" : milestones}; //T0DO - NO DUPES
+    var dueDate = req.body.dueDate;
+    var milestones = req.body.milestones;
+    module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "completionDate" : "", "courseworkCompleted" : false, "milestones" : milestones}; //T0DO - NO DUPES
     daoUser.updateModule(sessionData , module);
     res.end();
 })
-/////////////////
 
 controller.post('/', function(req, res) {
     const uname = req.body.uname;
@@ -80,14 +92,14 @@ controller.post('/', function(req, res) {
             if (entry == null) {
                 console.log("none there");
             } else {
-
-                if (entry.passowrd == pword) {
-                    sessionData = entry._id;
-                    res.redirect('/home');
-                } else {
-                    console.log("Username or Password Wrong");
-                    res.redirect('/');
-                }
+                bcrypt.compare(pword , entry.password , function(err,result){
+                    if(result){
+                        sessionData = entry._id ;
+                        res.redirect('/home');
+                    }else {
+                        res.send("bums");
+                    }
+                })
             }
         })
         .catch((err) => {
@@ -114,7 +126,14 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/del', function(req, res) {
     const module_id = req.body.id;
-    daoUser.removeModule(sessionData , module_id) ;
+    daoUser.removeModule(sessionData, module_id) ;
+    res.redirect('/home') ; 
+
+});
+
+controller.post('/completeCW', function(req, res) {
+    const module_id = req.body.id;
+    daoUser.completeModule(sessionData , module_id) ;
     res.redirect('/home') ; 
 
 });
@@ -218,8 +237,7 @@ controller.post('/log', function(req, res) {
 
 controller.post('/delAll', function(res,res) {
     daoUser.removeAllModules(sessionData);
-
-    res.redirect('/home');
+    res.end();
 });
 
 module.exports = controller;

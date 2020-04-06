@@ -4,10 +4,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-<script src="regular.js"></script>
+{{! datePicker dependencies + function }}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script> $( function() {
+    $( "#dueDate" ).datepicker({
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
+    });
+}); </script>
+
+<script src="add.js"></script>
+<script src="sort.js"></script>
+<script src="completeModule.js"></script>
 </head>
 <body>
 
@@ -23,9 +37,11 @@
   <option value="2">Reverse Alphabetical</option>
   <option value="3">Earliest Due Date</option>
   <option value="4">Lastest Due Date</option>
+  <option value="5">Completed Projects</option>
+  <option value="6">Uncompleted Projects</option>
 </select>
 <br>
- 
+
 <hr>
 <table id = "modules" border="1">
 </table>
