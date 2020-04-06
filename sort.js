@@ -42,6 +42,12 @@ function whatTable(sort){
         case "4":
             //setTableLate()
             break;
+        case "5":
+            setTableCompleted();
+            break;
+        case "6":
+             setTableUncompleted();
+            break;
     }   
 }
 
@@ -57,6 +63,28 @@ function setTableUnsorted(){
 //Gets alphbeitcall sorted sorted data and then runs fucntion to display data.
 function setTableSorted(){
     var sorted = getAlphModules() ;
+        sorted.then((data) => {
+            $('#modules').empty();
+            displayTable(data);
+    
+        })
+}
+
+//Gets Completed Projects data and then runs function to display data
+function setTableCompleted(){
+    console.log("setTableCompleted");
+    var sorted = showCompleted() ;
+        sorted.then((data) => {
+            $('#modules').empty();
+            displayTable(data);
+    
+        })
+}
+
+//Gets Uncomplete projects data and then runs function to display data
+function setTableUncompleted(){
+    console.log("setTableCompleted");
+    var sorted = showUncompleted() ;
         sorted.then((data) => {
             $('#modules').empty();
             displayTable(data);
@@ -98,6 +126,48 @@ function getUnsortedModules(){
             }
         })
     })
+}
+
+function showCompleted(){
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : 'http://localhost:3000/getModules',
+            success : function(data){
+                var module = [];
+                var number = 0;
+                for(var x=0; x<data.module.length; x++){
+                    if(data.module[x].completionDate !== ""){
+                        module[number]=data.module[x];
+                        number++;
+                    }
+                }
+                var completed = {"module":module};
+                $('#modules').empty();
+                displayTable(completed);
+            }
+      });
+}
+
+function showUncompleted(){
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : 'http://localhost:3000/getModules',
+        success : function(data){
+            var module = [];
+            var number = 0;
+            for(var x=0; x<data.module.length; x++){
+                if(data.module[x].completionDate == ""){
+                    module[number]=data.module[x];
+                    number++;
+                }
+            }
+            var completed = {"module":module};
+            $('#modules').empty();
+            displayTable(completed);
+        }
+  });
 }
 
 //Gets alphabetically sorted modules from database and returns them.
