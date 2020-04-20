@@ -34,7 +34,9 @@ $(document).ready(function(){
     //Close new module form
     document.querySelector('.close').addEventListener("click", function() {
         document.querySelector('.modal-Adding').style.display = "none";
+        document.querySelector('.modal-Modify').style.display = "none";
     });
+    
 
     //Close Mass Deletion option form
     document.querySelector('.cancel').addEventListener("click", function() {

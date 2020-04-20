@@ -40,7 +40,7 @@ class  DAO  {
         })
     }
 
-    updateModule(id, module) {
+    insertModule(id, module) {
         this.db.update({ _id: id }, { $push: { module: module } }, {}, function() {});
     }
 
@@ -49,7 +49,6 @@ class  DAO  {
         return new Promise((resolve, reject) => {
             this.db.findOne({module :{$elemMatch : {"module_id": y} }}, function(err , entries) {
                 
-                console.log(module_id);
                 if (err) {
                     reject(err);
                     console.log(err);
@@ -73,10 +72,11 @@ class  DAO  {
     }
 
     completeModule(id , module_id){
+        console.log(module_id + " 75");
         var t = this.searchByID(id);
         t.then((entries) => {
             for(var x = 0; x < entries.module.length; x++)
-                if(entries.module[x].module_id == module_id && entries.module[x].courseworkCompleted == false) {
+                if(entries.module[x].module_id == module_id && entries.module[x].courseworkCompleted == false ) {
                     this.removeModule(id, module_id);
                     var g = entries.module[x];
 
@@ -85,10 +85,34 @@ class  DAO  {
                     var formattedMonth = ('0' + (date.getMonth() + 1)).slice(-2);
                     var formattedYear = date.getFullYear().toString();
                     var dateString = formattedDate + '/' + formattedMonth + '/' + formattedYear;
-
                     g.completionDate = dateString;
                     g.courseworkCompleted = true;
-                    this.updateModule(id, g);
+                    this.insertModule(id, g);
+                }
+        })
+    }
+
+    updateModule(id , module){
+        var t = this.searchByID(id);
+        t.then((entries) => {
+            for(var x = 0; x < entries.module.length; x++)
+                if(entries.module[x].module_id == module.module_id ) {
+                    this.removeModule(id, module.module_id);
+                    var g = entries.module[x];
+                    g.projectTitle= module.projectTitle ; 
+                    g.moduleName = module.moduleName;
+                    g.milestones = module.milestones;
+                    g.dueDate = module.dueDate ;
+                    g.courseworkCompleted = module.courseworkCompleted;
+                    console.log(module.completionDate);
+                    if(module.courseworkCompleted == false){
+                        g.completionDate = "" ; 
+                    }else{
+                        g.completionDate = module.completionDate;
+                    }
+
+                    
+                    this.insertModule(id, g);
                 }
         })
     }
