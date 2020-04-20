@@ -25,7 +25,13 @@ $(document).ready(function(){
 
     //Close new module form
     document.querySelector('.close').addEventListener("click", function() {
-        document.querySelector('.modal-Adding').style.display = "none";
+        document.querySelector('.modal-Adding').style.display = "none" ; 
+    });
+
+    
+    //Close new module form
+    document.querySelector('.modClose').addEventListener("click", function() {
+    document.querySelector('.modal-Modify').style.display = "none";
     });
 
     //Close Mass Deletion option form
@@ -117,6 +123,48 @@ $(document).ready(function(){
         }
         
 
+    })
+
+    $('#modProject').click(function() {
+        var module_id = $('#modProject').val();
+        var projectTitle = $('#modProjectTitle').val();
+        var moduleName = $('#modMName').val();
+        var noOfMilestones = $('#modNoOfMilestones').find(':selected').text();
+        var dueDate = $('#modDueDate').val();
+        var completionDate = $('#modComDate').val();
+        var milestones = [] ;
+        if(document.getElementById('modCompleted').checked){
+            var courseworkCompleted = true ;
+        }else {
+            var courseworkCompleted = false ;
+        }
+        console.log(courseworkCompleted);
+
+        for (var x = 0 ; x < noOfMilestones ; x++){
+            var milestoneStep = x + 1; //Use 'human' counting, start from 1
+            var Desc = prompt("Description of milestone " + milestoneStep);
+            var milestoneID = Math.floor(Math.random() * 101) ; //TEMP
+            milestone = {"milestone_id" : milestoneID, "Desc" : Desc, "milestoneStep" : x, "milestoneCompleted" : false} ;
+            milestones[x] = milestone ; 
+        }
+
+        var data = {"module_id" : module_id ,"projectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : completionDate} ; 
+        
+
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            data : JSON.stringify(data),
+            url : 'http://localhost:3000/updateModule',
+            success : function(){
+                document.querySelector(".modal-Modify").style.display = "none";
+                getSorted();
+            },
+            error : function(error){
+                console.log("error");
+            }
+        })
+        
     })
  
 

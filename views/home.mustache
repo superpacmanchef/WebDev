@@ -85,6 +85,46 @@
     <br><button class="btn btn-secondary" type:"submit" id="addProject">Add New Project</button>
 </div>
 
+<div id = "Modify" class="modal-Modify">
+    <h1> Add a new Project </h1>
+    <div class="modClose">+</div>
+    <div class="form-row">
+        <div class="col">
+            <label for="Module Name">Module Name</label>
+            <input type="text" id="modMName" name="modMName">
+        </div>
+        <div class="col">
+            <label for="Project Title">Project Title</label>
+            <input type="text" id="modProjectTitle" name="modProjectTitle">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <label for="modNoOfMilestones">No. of MileStones</label><br>
+            <select name="modNoOfMilestones" id="modNoOfMilestones">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="dueDate">Due Date</label><br>
+            <input type="text" id="modDueDate" name="modDueDate"><br>
+        </div>
+
+        <div class = "col">
+            <label for="completed">Completed?</label><br>
+            <input type = "checkbox" id="modCompleted" name="modCompleted">
+            <label class = "modCOM" for="modComDate">Due Date</label><br>
+            <input class = "modCOM" type="text" id="modComDate" name="modComDate"><br>
+
+        </div>
+    </div>
+    <br><button class="btn btn-secondary" type:"submit" id="modProject"> Modiyfy Project</button>
+</div>
+
 <div id = "delMultipleProjets" class="modal-Deleting">
     <h2> Please Select an Option </h2>
         <div class="cancel">+</div>
@@ -189,7 +229,24 @@
         margin-left: auto;
         margin-right: auto;
         display: none;
-        } 
+        }
+
+        .modal-Modify { 
+        z-index: 1000;
+        height: 275px;
+        width: 500px;
+        background-color: white;
+        text-align: center;
+        padding: 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        position: relative;
+        margin-top: -250px;
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+        }  
 
         .modal-Adding h1 {
             margin-top: -20px;
@@ -202,6 +259,16 @@
         }
 
         .close {
+            position: relative;
+            top: -75px;
+            left: 35px;
+            transform: rotate(45deg);
+            font-size: 40px;
+            color: black;
+            cursor: pointer;
+                }
+
+                .modClose {
             position: relative;
             top: -75px;
             left: 35px;
@@ -230,6 +297,8 @@
             color: black;
             cursor: pointer;
                 }
+        
+                
 
 </style>
 </body>
