@@ -26,7 +26,8 @@ $(document).ready(function(){
             data : JSON.stringify(data = {"id" : $(this).val()}),
             url : 'http://localhost:3000/getModule',
             success : function(response){
-                var json = response ;
+                var json = response.module ;
+                console.log(json);
                 $('#modMName').val(json.moduleName);
                 $('#modProjectTitle').val(json.projectTitle);
                 $('#modDueDate').val(json.dueDate);

@@ -1,0 +1,14 @@
+<html>
+<script id="milestone" type="text/html">
+    <tr>
+        {{#milestones}}
+        <div class = "milestone" id={{milestone_id}}>
+        {{Desc}}
+        {{milestoneStep}}
+        {{milestoneCompleted}}
+        <button class = "complete" value = {{milestone_id}}>Complete </button>
+        </div>
+        {{/milestones}}
+    </tr>
+
+</script>
