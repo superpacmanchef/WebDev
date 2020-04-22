@@ -9,6 +9,7 @@
 
 {{! datePicker dependencies + function }}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="view.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script> $( function() {
@@ -18,25 +19,42 @@
         changeYear: true
     });
 }); </script>
-
-<script src="add.js"></script>
-<script src="sort.js"></script>
-<script src="completeModule.js"></script>
 </head>
 <body>
-Module ID :  {{module_id}}</br>
+
+
+<div id= "Mid" value = {{module_id}}> Module ID :  {{module_id}}</div></br>
 Project Tile :  {{projectTitle}}</br>
 Module name :  {{moduleName}}</br>
 Due Data :   {{dueDate}}</br>
-Completion Data: {{completeDate}}</br>
+Completion Date: {{completionDate}}</br>
 Coursework Complete : {{courseworkCompleted}}</br>
-{{#milestones}}</br>
-{{milestone_id}}</br>
-{{Desc}}</br>
-{{milestoneStep}}</br>
-{{milestoneCompleted}}</br>
-{{/milestones}}</br>
-<p>bums</p>
-</body>
 
+{{#milestones}}</br>
+<button class="milestonesBtn" id = "completed" value = {{milestone_id}}>{{Desc}} </button>
+
+</div>
+{{/milestones}}
+
+<style>
+        .milestonesBtn{
+            height: 100px;
+            width: 200px;
+            background-color: white;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+
+
+
+</style>
+
+
+
+
+
+
+
+</body>
 </html>
