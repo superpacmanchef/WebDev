@@ -20,6 +20,7 @@ $(document).ready(function(){
 
     $(document).on("click","#modules tr td button.modify", function() {
         document.querySelector(".modal-Modify").style.display = "block";
+        $("#modifyHeading").empty();
         $.ajax({
             type : "POST",
             contentType : "application/json",
@@ -30,6 +31,7 @@ $(document).ready(function(){
                 console.log(json);
                 $('#modMName').val(json.moduleName);
                 $('#modProjectTitle').val(json.projectTitle);
+                $("#modifyHeading").append("Modify " + json.projectTitle)
                 $('#modDueDate').val(json.dueDate);
                 $('#modNoOfMilestones').val(json.milestones.length);
                 $('#modProject').val(json.module_id);

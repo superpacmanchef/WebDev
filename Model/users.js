@@ -158,32 +158,35 @@ class  DAO  {
     }
 
     completeMilestone(id , milestoneID , module_id){
-        console.log(module_id + "160");
         return new Promise((resolve, reject) => {
         var module = this.findModule(module_id);
+        var done = false ; 
         module.then((module) => {
             var moduleR = module.module ; 
             for(var x  = 0 ; x < moduleR.milestones.length ; x++){
                 if(moduleR.milestones[x].milestone_id  ==  milestoneID){
+                    done = true ; 
                 var milestone = moduleR.milestones[x];
+                console.log(milestone.milestoneCompleted + "168");
                 if(milestone.milestoneCompleted == true){
                     milestone.milestoneCompleted = false;
-                moduleR.milestones[x] = milestone ;
-                this.updateModulemoduleR;
-                resolve("done");
+                    moduleR.milestones[x] = milestone ;
+                    this.updateModule(moduleR);
+                    resolve(moduleR.milestones[x].milestoneCompleted);
                 }else{
-                milestone.milestoneCompleted = true;
-                moduleR.milestones[x] = milestone ;
-                this.updateModule(moduleR);
-                resolve("done");
+                    milestone.milestoneCompleted = true;
+                    moduleR.milestones[x] = milestone ;
+                    this.updateModule(moduleR);
+                    resolve(moduleR.milestones[x].milestoneCompleted);
                 }
-                }else {
-                    reject("error");
                 }
 
             }
+            if(done == false){
+                reject("err");
+            }
         })
-    })
+    }) 
     }
 
 }

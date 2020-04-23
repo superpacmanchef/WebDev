@@ -128,10 +128,12 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/getModule' , function(req,res){
     var id = req.body.id ; 
+    console.log(id);
     var data = daoUser.findModule(id);
-    data.then((data) => {
+    data.then((data ) => {
+        console.log("sssss");
         res.send(data);
-    });
+    }).catch();
 })
 
 controller.post('/del', function(req, res) {
@@ -267,13 +269,13 @@ controller.post('/updateModule' , function(req,res){
 
 controller.post('/completeMilestone' , function(req , res){
     var module_id = req.body.module_id ;
-    var milestone_id = req.body.milestone_id ; 
+    var milestone_id = req.body.milestone_id; 
     var id = sessionData ; 
     var t = daoUser.completeMilestone(id , milestone_id , module_id) ;
     t.then((mod) => {
-        if(mod == "done"){
-           res.send("done");
-        }else{res.send("error");}
+        
+           res.send(mod);
+        
     })
     
 })
