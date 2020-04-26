@@ -55,8 +55,9 @@ class  DAO  {
                 } else {
                     for(var x = 0 ; x <= entries.module.length - 1 ; x++){
                         
-                        if(entries.module[x].module_id == module_id){ 
-                            resolve(entries.module[x]); 
+                        if(entries.module[x].module_id == module_id){
+                            var data = {"module" : entries.module[x] , "uID" : entries._id}; 
+                            resolve(data); 
                         }
                     }
                 }
@@ -68,7 +69,7 @@ class  DAO  {
     removeModule(id , module_id){
         var t = this.findModule(module_id) ; 
         t.then((x) => {
-            this.db.update({ _id: id }, { $pull:  {module : x}  }, {}, function(err , numRemoved) {});})
+            this.db.update({ _id: id }, { $pull:  {module : x.module}  }, {}, function(err , numRemoved) {});})
     }
 
     completeModule(id , module_id){
@@ -92,13 +93,13 @@ class  DAO  {
         })
     }
 
-    updateModule(id , module){
-        var t = this.searchByID(id);
-        t.then((entries) => {
-            for(var x = 0; x < entries.module.length; x++)
-                if(entries.module[x].module_id == module.module_id ) {
-                    this.removeModule(id, module.module_id);
-                    var g = entries.module[x];
+    updateModule( module){
+        var v = this.findModule(module.module_id);
+        v.then((entries) => {
+            var id = entries.uID;
+            var g = entries.module ; 
+            this.removeModule(id , module.module_id);
+            var g = entries.module;
                     g.projectTitle= module.projectTitle ; 
                     g.moduleName = module.moduleName;
                     g.milestones = module.milestones;
@@ -113,7 +114,7 @@ class  DAO  {
 
                     
                     this.insertModule(id, g);
-                }
+
         })
     }
 
@@ -154,6 +155,38 @@ class  DAO  {
                 }
             });
         })
+    }
+
+    completeMilestone(id , milestoneID , module_id){
+        return new Promise((resolve, reject) => {
+        var module = this.findModule(module_id);
+        var done = false ; 
+        module.then((module) => {
+            var moduleR = module.module ; 
+            for(var x  = 0 ; x < moduleR.milestones.length ; x++){
+                if(moduleR.milestones[x].milestone_id  ==  milestoneID){
+                    done = true ; 
+                var milestone = moduleR.milestones[x];
+                console.log(milestone.milestoneCompleted + "168");
+                if(milestone.milestoneCompleted == true){
+                    milestone.milestoneCompleted = false;
+                    moduleR.milestones[x] = milestone ;
+                    this.updateModule(moduleR);
+                    resolve(moduleR.milestones[x].milestoneCompleted);
+                }else{
+                    milestone.milestoneCompleted = true;
+                    moduleR.milestones[x] = milestone ;
+                    this.updateModule(moduleR);
+                    resolve(moduleR.milestones[x].milestoneCompleted);
+                }
+                }
+
+            }
+            if(done == false){
+                reject("err");
+            }
+        })
+    }) 
     }
 
 }

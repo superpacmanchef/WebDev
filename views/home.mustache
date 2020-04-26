@@ -86,8 +86,9 @@
 </div>
 
 <div id = "Modify" class="modal-Modify">
-    <h1> Add a new Project </h1>
+    <h1 id="modifyHeading">  </h1>
     <div class="modClose">+</div>
+    <div class="modForm">
     <div class="form-row">
         <div class="col">
             <label for="Module Name">Module Name</label>
@@ -123,6 +124,7 @@
         </div>
     </div>
     <br><button class="btn btn-secondary" type:"submit" id="modProject"> Modiyfy Project</button>
+    </div>
 </div>
 
 <div id = "delMultipleProjets" class="modal-Deleting">
@@ -233,7 +235,7 @@
 
         .modal-Modify { 
         z-index: 1000;
-        height: 275px;
+        height: 400px;
         width: 500px;
         background-color: white;
         text-align: center;
@@ -250,6 +252,15 @@
 
         .modal-Adding h1 {
             margin-top: -20px;
+        }
+
+        .modal-Modify h1 {
+            margin-top: -20px;
+        }
+
+        .modForm .form-row .col {
+            position:relative
+            margin-top: -40px;
         }
 
         #addProject {
@@ -270,8 +281,9 @@
 
                 .modClose {
             position: relative;
-            top: -75px;
-            left: 35px;
+            clear: both;
+            top: -90px;
+            right: -230px;
             transform: rotate(45deg);
             font-size: 40px;
             color: black;

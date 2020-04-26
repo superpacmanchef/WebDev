@@ -41,7 +41,8 @@ controller.get('/view', function(req, res) {
     var q = req.query.view ;
     var m = daoUser.findModule(q);
     m.then((module) => {
-        res.render('view' , module);
+        
+        res.render('view' , module.module);
     });
 });
 
@@ -127,10 +128,12 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/getModule' , function(req,res){
     var id = req.body.id ; 
+    console.log(id);
     var data = daoUser.findModule(id);
-    data.then((data) => {
+    data.then((data ) => {
+        console.log("sssss");
         res.send(data);
-    });
+    }).catch();
 })
 
 controller.post('/del', function(req, res) {
@@ -260,8 +263,22 @@ controller.post('/updateModule' , function(req,res){
     var completionDate = req.body.completionDate ; 
 
     var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : completionDate}; //T0DO - NO DUPES
-    daoUser.updateModule(sessionData , module) ; 
+    daoUser.updateModule( module) ; 
     res.end();
 });
+
+controller.post('/completeMilestone' , function(req , res){
+    var module_id = req.body.module_id ;
+    var milestone_id = req.body.milestone_id; 
+    var id = sessionData ; 
+    var t = daoUser.completeMilestone(id , milestone_id , module_id) ;
+    t.then((mod) => {
+        
+           res.send(mod);
+        
+    })
+    
+})
+
 
 module.exports = controller;
