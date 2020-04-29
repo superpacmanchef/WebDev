@@ -1,6 +1,9 @@
 <html>
 <head>
 <title>Register Account</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="reg.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <style> 
         .modal-contents-register { 
@@ -48,40 +51,39 @@
 <body>
 
 <div id="register">
-<form action = "/register" method=POST>
 <div id = "register" class="modal-contents-register">
         <h1>Register</h1><br>
         <img src="../img/Project.jpg" alt="ProjectPicture">
 
         <div class="form-group">
         <label for="fname"><b>Firstname</b></label> <br>
-        <input type="text" placeholder="Firstname" name="fname" required>
+        <input type="text" placeholder="Firstname" id="fname" name="fname" required>
         </div>
 
          <div class="form-group">
         <label for="sname"><b>Surname</b></label> <br>
-        <input type="text" placeholder="Surname" name="sname" required> <br>
+        <input type="text" placeholder="Surname" id="sname" name="sname" required> <br>
         </div>
 
         <div class="form-group">
         <label for="uname"><b>Username</b></label> <br>
-        <input type="text" placeholder="Enter Username" name="uname" required> <br>
+        <input type="text" placeholder="Enter Username" id = "uname" name="uname" required> <br>
         </div>
         
 
         <div class="form-group">
         <label for="psw"><b>Password</b></label> <br>
-        <input type="password" placeholder="Enter Password" name="psw" required> <br>
+        <input type="password" placeholder="Enter Password" id="psw" name="psw" required> <br>
         </div>
 
         <div class="form-group">
         <label for="psw"><b>Repeat Password</b></label> <br>
-        <input type="password" placeholder="Re-Enter Password" name="pswR" required> <br>
+        <input type="password" placeholder="Re-Enter Password" id="pswR" name="pswR" required> <br>
         </div>
 
         <div class="form-group">
         <label for="course"><b>Course</b></label> <br>
-        <input type="text" placeholder="Course" name="course" required> <br>
+        <input type="text" placeholder="Course" id="course" name="course" required> <br>
         </div>
 
 
@@ -262,9 +264,8 @@
         </div><br>
 
         <div class="form-group">
-        <button class="btn btn-secondary" type="submit">Register</button>
+        <button id = "reg" class="btn btn-secondary" type="submit">Register</button>
         </div>
-       </form>
         <a href="/">Already Have Account?</a>
     </div>
 

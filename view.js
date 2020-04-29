@@ -24,7 +24,7 @@ $(document).ready(function() {
         error : function(error){
             
         }
-    }).always();
+    })
     });
 
 })
