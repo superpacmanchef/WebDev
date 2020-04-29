@@ -6,13 +6,26 @@ let DAOUser = require('../Model/users.js');
 var dbFileUser = 'User.nedb.db';
 let daoUser = new DAOUser(dbFileUser);
 
-var sessionData;
+var sessionData = "";
 
 
 //renders Login Page
 controller.get("/", function(req, res) {
+    if(sessionData == ""){
     res.render('login');
+    }else{
+        var t = daoUser.searchByID(sessionData);
+
+    t.then((entry) => {
+        console.log(entry);
+        console.log(sessionData + "32");
+            res.render('home', { "uname": entry.username ,
+                                  "course": entry.course
+                               });
+        });
+    }
 });
+    
 
 //Renders Register Page
 controller.get('/register', function(req, res) {
@@ -24,6 +37,8 @@ controller.get('/home', function(req, res) {
     var t = daoUser.searchByID(sessionData);
 
     t.then((entry) => {
+        console.log(entry);
+        console.log(sessionData + "32");
         if (entry.username == null) {
 
         } else {
@@ -48,7 +63,6 @@ controller.get('/view', function(req, res) {
 
 
 
-//TODO : NO DUPES
 controller.post('/register', function(req, res) {
     const fname = req.body.fname;
     const sname = req.body.sname;
@@ -260,7 +274,7 @@ controller.post('/sortEDueDate', function(req, res){
 })
 
 controller.post('/log', function(req, res) {
-    sessionData = null ; 
+    sessionData = "" ; 
     res.redirect('/');
 })
 
