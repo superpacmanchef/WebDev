@@ -62,28 +62,45 @@ controller.post('/register', function(req, res) {
         if(pword == pwordR){
             bcrypt.hash(pword , saltRounds , (err , hash) => {
                 daoUser.insertUser(fname , sname , uname , hash , course ,uni , salt) ; 
-                res.redirect('/');
             })
             }else {
                 
             }
     });
-
-
+    res.end();
 
 });
 
+
+controller.post('/regCheck', function(req, res) {
+    const uname = req.body.uname;
+    var t = daoUser.searchByName(uname);
+     t.then((data) => { 
+        console.log(data);
+    if(data == "" || data == null){
+            res.send("true");
+        }else{
+            res.send("false");
+        }
+        res.end();
+     });
+
+});
+
+
 controller.post('/add', function(req, res) {
-    var findabetterway = Math.floor(Math.random() * 101) ; ////////  
+    bcrypt.genSalt(saltRounds , function(err , salt){ 
     var projectTitle = req.body.projectTitle;
     var moduleName = req.body.mName;
     var dueDate = req.body.dueDate;
     var milestones = req.body.milestones;
     
-    var module = {"module_id" : findabetterway, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "completionDate" : "", "courseworkCompleted" : false , "milestones" : milestones}; //T0DO - NO DUPES
+    var module = {"module_id" : salt, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "completionDate" : "", "courseworkCompleted" : false , "milestones" : milestones}; //T0DO - NO DUPES
     daoUser.insertModule(sessionData , module);
     res.end();
-})
+    });
+});
+
 
 controller.post('/', function(req, res) {
     const uname = req.body.uname;
