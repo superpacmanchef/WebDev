@@ -45,7 +45,7 @@ class  DAO  {
     }
 
     findModule(module_id) {
-        var y = Number(module_id);
+        var y = module_id;
         return new Promise((resolve, reject) => {
             this.db.findOne({module :{$elemMatch : {"module_id": y} }}, function(err , entries) {
                 
