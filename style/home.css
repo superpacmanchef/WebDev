@@ -1,0 +1,187 @@
+body {
+    margin: 16px;
+    padding: 0px;
+}
+.img {
+    max-height: 40px;
+    max-width: 40px;
+}
+form.logOutForm {
+    margin: 1% 1% 0px 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+table {
+    border: none;
+}
+tr th{
+    text-align: center;
+    padding: 4px 8px;
+}
+tr td:nth-child(-1n+4) {
+    padding: 0 6px;
+}
+tr:nth-child(even) td:nth-child(-1n+4) {
+    background-color: #e6e6e6;
+}
+table tr td:nth-child(1n+5) {
+    border: none;
+}
+button img {
+    max-height: 30px;
+    max-width: 30px;
+}
+button {
+    border: none;
+    color: black;
+    text-align: center;
+}
+td button.btn {
+    color: black;
+}
+button.delete:hover, button.modify:hover, button.completeCW:hover, button.view:hover {
+    color: white;
+    cursor: pointer;
+}
+input:not(#Log) {
+    margin-left: 6px;
+    width: 200px;
+}
+.filterDiv {
+    margin-left: 24px;
+}
+.filterDiv label {
+    margin-right: 10px;
+}
+.modal-del {
+    z-index: 1000;
+    height: 250px;
+    width: 400px;
+    background-color: white;
+    text-align: center;
+    padding: 45px;
+    border-radius: 25px;
+    border: 2px;
+    border-style: solid;
+    position: relative;
+    margin-top: -250px;
+    margin-left: auto;
+    margin-right: auto;
+    display:none;
+}
+.modal-del-contents {
+    position: relative;
+    top: -60px;
+}
+.modal-del h2 {
+    margin-top: -20px;
+}
+.modal-del .form-row {
+    margin-top: -40px;
+}
+.modal-Deleting {
+    z-index: 1000;
+    height: 250px;
+    width: 475px;
+    background-color: white;
+    text-align: center;
+    padding: 45px;
+    border-radius: 25px;
+    border: 2px;
+    border-style: solid;
+    position: relative;
+    margin-top: -250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+.deleteOptionRadios {
+    position: relative;
+    margin-top: -40px;
+    float: left;
+}
+.modal-Adding {
+    z-index: 1000;
+    height: 275px;
+    width: 500px;
+    background-color: white;
+    text-align: center;
+    padding: 45px;
+    border-radius: 25px;
+    border: 2px;
+    border-style: solid;
+    position: relative;
+    margin-top: -250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+.modal-Modify {
+    z-index: 1000;
+    height: 400px;
+    width: 500px;
+    background-color: white;
+    text-align: center;
+    padding: 45px;
+    border-radius: 25px;
+    border: 2px;
+    border-style: solid;
+    position: relative;
+    margin-top: -250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+.modal-Adding h1 {
+    margin-top: -20px;
+}
+.modal-Modify h1 {
+    margin-top: -20px;
+}
+.modForm .form-row .col {
+    position:relative;
+    margin-top: -40px;
+}
+#addProject {
+    position: relative;
+    margin-top: -5px;
+    float: right;
+}
+.close {
+    position: relative;
+    top: -75px;
+    left: 35px;
+    transform: rotate(45deg);
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
+}
+.modClose {
+    position: relative;
+    clear: both;
+    top: -90px;
+    right: -230px;
+    transform: rotate(45deg);
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
+}
+.close3 {
+    position: relative;
+    top: -85px;
+    left: 180px;
+    transform: rotate(45deg);
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
+}
+.cancel {
+    position: relative;
+    top: -100px;
+    left: 215px;
+    transform: rotate(45deg);
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
+}

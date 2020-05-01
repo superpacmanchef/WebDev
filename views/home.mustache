@@ -6,6 +6,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../style/home.css">
 
 {{! datePicker dependencies + function }}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -25,33 +26,43 @@
 </head>
 <body>
 
-<h1>{{uname}}</h1>
-<h1>{{course}}</h1>
+<div class="form-inline">
+    <h1>{{uname}}</h1>
+    <h1>,&nbsp</h1>
+    <h1>{{course}}</h1>
+</div>
 
 <br>
-<input type="Submit" value="Add New Project" name="newAdd" id="newAdd"/>
+<div class="form-inline">
+    <img class="img" src="../img/add.png">
+    <input class="btn btn-success input-control" value="Add New Project" name="newAdd" id="newAdd"/>
+    <div class="form-group filterDiv">
+        <label for="sort">Filter Table...</label>
+        <select class="form-control" id="sort">
+        <option value="0">Latest Inputed</option>    
+        <option value="1">Alphabetical</option>
+        <option value="2">Reverse Alphabetical</option>
+        <option value="3">Earliest Due Date</option>
+        <option value="4">Lastest Due Date</option>
+        <option value="5">Completed Projects</option>
+        <option value="6">Uncompleted Projects</option>
+        </select>
+    </div>
+    <form class="logOutForm" action="/log" method="post">
+        <img class="img" src="../img/logOut.png">
+        <input class="btn btn-default" type="Submit" value="Logout" name="Log" id="Log" />
+    </form>
+</div>
 
-<select id="sort">
-  <option value="0" selected>Latest Inputed</option>    
-  <option value="1">Alphabetical</option>
-  <option value="2">Reverse Alphabetical</option>
-  <option value="3">Earliest Due Date</option>
-  <option value="4">Lastest Due Date</option>
-  <option value="5">Completed Projects</option>
-  <option value="6">Uncompleted Projects</option>
-</select>
-<br>
 
 <hr>
-<table id = "modules" border="1">
-</table>
+<table id = "modules" border="1"></table>
 <hr>
 
-<form action="/log" method="post">
-    <input type="Submit" value="Logout" name="Log" id="Log" />
-</form>
-
-<input type="Submit" value="Delete Multiple Projects" name="delMul" id="delMul"/>
+<div class="input-container">
+    <img class="img" src="../img/deleteAll.png">
+    <input class="btn btn-danger" type="Submit" value="Delete Multiple Projects" name="delMul" id="delMul"/>
+</div>
 
 <div id = "Adding" class="modal-Adding">
     <h1> Add a new Project </h1>
@@ -82,7 +93,7 @@
             <input type="text" id="dueDate" name="dueDate"><br>
         </div>
     </div>
-    <br><button class="btn btn-secondary" type:"submit" id="addProject">Add New Project</button>
+    <br><button class="btn btn-success" type:"submit" id="addProject">Add New Project</button>
 </div>
 
 <div id = "Modify" class="modal-Modify">
@@ -157,161 +168,5 @@
      </div>
 </div>
 
-<style>
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-
-    .modal-del {
-         z-index: 1000;
-        height: 250px;
-        width: 400px;
-        background-color: white;
-        text-align: center;
-        padding: 45px;
-        border-radius: 25px;
-        border: 2px;
-        border-style: solid;
-        position: relative;
-        margin-top: -250px;
-        margin-left: auto;
-        margin-right: auto;
-        display:none;
-    }
-
-    .modal-del-contents {
-        position: relative;
-        top: -60px;
-    }
-
-    .modal-del h2 {
-        margin-top: -20px;
-    }
-
-    .modal-del .form-row {
-        margin-top: -40px;
-    }
-
-    .modal-Deleting { 
-        z-index: 1000;
-        height: 250px;
-        width: 475px;
-        background-color: white;
-        text-align: center;
-        padding: 45px;
-        border-radius: 25px;
-        border: 2px;
-        border-style: solid;
-        position: relative;
-        margin-top: -250px;
-        margin-left: auto;
-        margin-right: auto;
-        display: none;
-        } 
-
-    .deleteOptionRadios {
-        position: relative;
-        margin-top: -40px;
-        float: left;
-    }
-
-    .modal-Adding { 
-        z-index: 1000;
-        height: 275px;
-        width: 500px;
-        background-color: white;
-        text-align: center;
-        padding: 45px;
-        border-radius: 25px;
-        border: 2px;
-        border-style: solid;
-        position: relative;
-        margin-top: -250px;
-        margin-left: auto;
-        margin-right: auto;
-        display: none;
-        }
-
-        .modal-Modify { 
-        z-index: 1000;
-        height: 400px;
-        width: 500px;
-        background-color: white;
-        text-align: center;
-        padding: 45px;
-        border-radius: 25px;
-        border: 2px;
-        border-style: solid;
-        position: relative;
-        margin-top: -250px;
-        margin-left: auto;
-        margin-right: auto;
-        display: none;
-        }  
-
-        .modal-Adding h1 {
-            margin-top: -20px;
-        }
-
-        .modal-Modify h1 {
-            margin-top: -20px;
-        }
-
-        .modForm .form-row .col {
-            position:relative
-            margin-top: -40px;
-        }
-
-        #addProject {
-            position: relative;
-            margin-top: -5px;
-            float: right;
-        }
-
-        .close {
-            position: relative;
-            top: -75px;
-            left: 35px;
-            transform: rotate(45deg);
-            font-size: 40px;
-            color: black;
-            cursor: pointer;
-                }
-
-                .modClose {
-            position: relative;
-            clear: both;
-            top: -90px;
-            right: -230px;
-            transform: rotate(45deg);
-            font-size: 40px;
-            color: black;
-            cursor: pointer;
-                }
-
-         .close3 {
-            position: relative;
-            top: -85px;
-            left: 180px;
-            transform: rotate(45deg);
-            font-size: 40px;
-            color: black;
-            cursor: pointer;
-                }
-
-        .cancel {
-            position: relative;
-            top: -100px;
-            left: 215px;
-            transform: rotate(45deg);
-            font-size: 40px;
-            color: black;
-            cursor: pointer;
-                }
-        
-                
-
-</style>
 </body>
 <html>
