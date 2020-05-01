@@ -19,9 +19,7 @@ controller.get("/", function(req, res) {
     t.then((entry) => {
         console.log(entry);
         console.log(sessionData + "32");
-            res.render('home', { "uname": entry.username ,
-                                  "course": entry.course
-                               });
+            res.redirect('/home');
         });
     }
 });
@@ -34,6 +32,9 @@ controller.get('/register', function(req, res) {
 
 //Renders Home Page
 controller.get('/home', function(req, res) {
+    if(sessionData == ""){
+        res.redirect('/');
+    }else{
     var t = daoUser.searchByID(sessionData);
 
     t.then((entry) => {
@@ -46,9 +47,8 @@ controller.get('/home', function(req, res) {
                                   "course": entry.course
                                });
         }
-    })
-
-    
+    })    
+}
 });
 
 
@@ -56,8 +56,11 @@ controller.get('/view', function(req, res) {
     var q = req.query.view ;
     var m = daoUser.findModule(q);
     m.then((module) => {
-        
+        if(module == "null"){
+            res.render('wrongID');
+        }else{
         res.render('view' , module.module);
+        }
     });
 });
 
@@ -130,7 +133,7 @@ controller.post('/', function(req, res) {
                         sessionData = entry._id ;
                         res.redirect('/home');
                     }else {
-                        res.send("bums");
+                        res.render('/');
                     }
                 })
             }
@@ -310,6 +313,8 @@ controller.post('/completeMilestone' , function(req , res){
     })
     
 })
+
+
 
 
 module.exports = controller;
