@@ -51,8 +51,8 @@ class  DAO  {
                 
                 if (err) {
                     reject(err);
-                    console.log(err);
                 } else {
+                    if(entries != null){
                     for(var x = 0 ; x <= entries.module.length - 1 ; x++){
                         
                         if(entries.module[x].module_id == module_id){
@@ -60,6 +60,9 @@ class  DAO  {
                             resolve(data); 
                         }
                     }
+                }else{
+                    resolve("null");
+                }
                 }
             });
     })

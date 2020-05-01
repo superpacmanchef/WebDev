@@ -7,16 +7,15 @@
         <th>Completion Date </th>
         </tr>
         {{#module}}
-        <tr>
-        <td>{{projectTitle}}</td>
-        <td>{{moduleName}}</td>
-        <td>{{dueDate}}</td>
-        <td>{{completionDate}}</td>
-        <td><button name = "del"   class="delete" value = {{module_id}}  > Delete</button></td>
-        <td ><button name = "mod"  class="modify" value = {{module_id}}>Modify</button></td>
-        <td><button name = "completeCW"  class="completeCW" value = {{module_id}}>Complete</button></td>
-        <td><button name = "view"  class="view" value = {{module_id}}>View</button></td>
-        </tr>
+            <tr>
+            <td>{{projectTitle}}</td>
+            <td>{{moduleName}}</td>
+            <td>{{dueDate}}</td>
+            <td>{{completionDate}}</td>
+            <td><button name = "del"   class="delete btn btn-danger" value = {{module_id}}><img src="../img/delete.png"> Delete</button></td>
+            <td><button name = "mod"  class="modify btn btn-warning" value = {{module_id}}><img src="../img/modify.png"> Modify</button></td>
+            <td><button name = "completeCW"  class="completeCW btn btn-success" value = {{module_id}}><img src="../img/complete.png"> Complete</button></td>
+            <td><button name = "view"  class="view btn btn-primary" value = {{module_id}}><img src="../img/share.png"> View</button></td>
+            </tr>
         {{/module}}
-</div>
 </script>
