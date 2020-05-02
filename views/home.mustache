@@ -18,6 +18,11 @@
         changeMonth: true,
         changeYear: true
     });
+    $( "#modDueDate" ).datepicker({
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
+    });
 }); </script>
 
 <script src="add.js"></script>
@@ -64,23 +69,26 @@
     <input class="btn btn-danger" type="Submit" value="Delete Multiple Projects" name="delMul" id="delMul"/>
 </div>
 
-<div id = "Adding" class="modal-Adding">
+<div id = "Adding" class="modal-form">
     <h1> Add a new Project </h1>
     <div class="close">+</div>
+    <br><br>
     <div class="form-row">
         <div class="col">
-            <label for="Module Name">Module Name</label>
-            <input type="text" id="mName" name="mName">
+            <label for="mName">Module Name</label>
+            <input type="text" class="form-control" id="mName" name="mName">
         </div>
+    </div>
+    <div class="form-row">
         <div class="col">
-            <label for="Project Title">Project Title</label>
-            <input type="text" id="projectTitle" name="projectTitle">
+            <label for="projectTitle">Project Title</label>
+            <input type="text" class="form-control" id="projectTitle" name="projectTitle">
         </div>
     </div>
     <div class="form-row">
         <div class="col">
             <label for="noOfMilestones">No. of MileStones</label><br>
-            <select name="noOfMilestones" id="noOfMilestones">
+            <select name="noOfMilestones" class="custom-select" id="noOfMilestones">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -90,30 +98,32 @@
         </div>
         <div class="col">
             <label for="dueDate">Due Date</label><br>
-            <input type="text" id="dueDate" name="dueDate"><br>
+            <input type="text" class="form-control" id="dueDate" name="dueDate">
         </div>
     </div>
-    <br><button class="btn btn-success" type:"submit" id="addProject">Add New Project</button>
+    <br><button class="btn btn-success modal-button" type="submit" id="addProject">Add New Project</button>
 </div>
 
-<div id = "Modify" class="modal-Modify">
-    <h1 id="modifyHeading">  </h1>
-    <div class="modClose">+</div>
-    <div class="modForm">
+<div id = "Modify" class="modal-form">
+    <div class="close">+</div>
+    <h1 id="modifyHeading"></h1>
+    <br><br>
     <div class="form-row">
         <div class="col">
-            <label for="Module Name">Module Name</label>
-            <input type="text" id="modMName" name="modMName">
+            <label for="mMName">Module Name</label>
+            <input type="text" class="form-control" id="modMName" name="modMName">
         </div>
+    </div>
+    <div class="form-row">
         <div class="col">
-            <label for="Project Title">Project Title</label>
-            <input type="text" id="modProjectTitle" name="modProjectTitle">
+            <label for="modProjectTitle">Project Title</label>
+            <input type="text" class="form-control" id="modProjectTitle" name="modProjectTitle">
         </div>
     </div>
     <div class="form-row">
         <div class="col">
             <label for="modNoOfMilestones">No. of MileStones</label><br>
-            <select name="modNoOfMilestones" id="modNoOfMilestones">
+            <select name="modNoOfMilestones" class="custom-select" id="modNoOfMilestones">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -122,51 +132,34 @@
             </select>
         </div>
         <div class="col">
-            <label for="dueDate">Due Date</label><br>
-            <input type="text" id="modDueDate" name="modDueDate"><br>
-        </div>
-
-        <div class = "col">
-            <label for="completed">Completed?</label><br>
-            <input type = "checkbox" id="modCompleted" name="modCompleted">
-            <label class = "modCOM" for="modComDate">Due Date</label><br>
-            <input class = "modCOM" type="text" id="modComDate" name="modComDate"><br>
-
+            <label for="modDueDate">Due Date</label><br>
+            <input type="text" class="form-control" id="modDueDate" name="modDueDate">
         </div>
     </div>
-    <br><button class="btn btn-secondary" type:"submit" id="modProject"> Modiyfy Project</button>
+    <br><button class="btn btn-warning modal-button" type="submit" id="modProject">Modify Project</button>
+</div>
+
+<div id = "delMultipleProjects" class="modal-form text-center">
+    <div class="close">+</div>
+    <h2>Please Select an Option</h2><br><br>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="CompletedProjects" name="deleteOptions" value="CompletedProjects">
+        <label class="form-check-label" for="CompletedProjects"> Select if you wish to delete all Completed Projects</label>
     </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="DeleteAllProjects" name="deleteOptions" value="DeleteAllProjects"> 
+        <label class="form-check-label" for="DeleteAllProjects"> Select if you wish to delete all projects</label>
+    </div><br><br>
+    <button class="btn btn-danger" type="submit" id="massDeleteBtn">Delete</button>
 </div>
 
-<div id = "delMultipleProjets" class="modal-Deleting">
-    <h2> Please Select an Option </h2>
-        <div class="cancel">+</div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="deleteOptionRadios">
-                    <input type="radio" id="CompletedProjects" name="deleteOptions" value="CompletedProjects">
-                    <label for="CompletedProjects"> Select if you wish to delete all CompletedProjects</label><br>
-                    <input type="radio" id="DeleteAllProjects" name="deleteOptions" value="DeleteAllProjects"> 
-                    <label for="DeleteAllProjects"> Select if you wish to delete all projects</label><br>
-                    </div>
-                </div>
-             </div>
-             <button class="btn btn-secondary" type:"submit" id="massDeleteBtn">Delete</button>
-</div>
-
-<div id="delAllProjects" class="modal-del">
-    <h2> Delete Confirmation </h2>
-    <div class="close3">+</div>
-    <div class="form-row>
-    <div class="col">
-    <div class="modal-del-contents">
-    <p> Are you sure you want to delete all of your projects? <br> If so please enter "Delete" into the input box to proceed </p>
-     <input type="text" id="deleteEntry" name="deleteEntry" placeholder="Delete">
-      <button class="btn btn-secondary" type:"submit" id="delAllProjectsBtn">Delete</button>
-     </div>
-     </div>
-     </div>
+<div id="delAllProjects" class="modal-form text-center">
+    <div class="close">+</div>
+    <h2>Delete Confirmation</h2><br><br>
+    <p>Are you sure you want to delete all of your projects? <br> If so please enter "Delete" into the input box to proceed</p>
+    <input type="text" class="form-control" id="deleteEntry" name="deleteEntry" placeholder="Delete"><br>
+    <button class="btn btn-danger" type="submit" id="delAllProjectsBtn">Confirm Mass Delete</button>
 </div>
 
 </body>
-<html>
+</html>

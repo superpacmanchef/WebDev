@@ -11,22 +11,26 @@ form.logOutForm {
     position: absolute;
     right: 0px;
     top: 0px;
+    padding: 4px;
+    border: 2px solid rgb(179, 179, 179);
+    border-radius: 6px;
 }
-table {
+#modules {
     border: none;
 }
-tr th{
+#modules tr th{
     text-align: center;
     padding: 4px 8px;
 }
-tr td:nth-child(-1n+4) {
+#modules tr td:nth-child(-1n+4) {
     padding: 0 6px;
 }
-tr:nth-child(even) td:nth-child(-1n+4) {
+#modules tr:nth-child(even) td:nth-child(-1n+4) {
     background-color: #e6e6e6;
 }
-table tr td:nth-child(1n+5) {
+#modules tr td:nth-child(1n+5) {
     border: none;
+    padding-left: 3px;
 }
 button img {
     max-height: 30px;
@@ -44,7 +48,7 @@ button.delete:hover, button.modify:hover, button.completeCW:hover, button.view:h
     color: white;
     cursor: pointer;
 }
-input:not(#Log) {
+#newAdd, #delMul {
     margin-left: 6px;
     width: 200px;
 }
@@ -54,132 +58,42 @@ input:not(#Log) {
 .filterDiv label {
     margin-right: 10px;
 }
-.modal-del {
+label {
+    margin-bottom: .3rem;
+}
+.form-row {
+    margin-bottom: 10px;
+}
+.form-row p {
+    width: 100%;
+}
+.modal-form {
     z-index: 1000;
-    height: 250px;
-    width: 400px;
-    background-color: white;
-    text-align: center;
-    padding: 45px;
-    border-radius: 25px;
-    border: 2px;
-    border-style: solid;
-    position: relative;
-    margin-top: -250px;
-    margin-left: auto;
-    margin-right: auto;
-    display:none;
-}
-.modal-del-contents {
-    position: relative;
-    top: -60px;
-}
-.modal-del h2 {
-    margin-top: -20px;
-}
-.modal-del .form-row {
-    margin-top: -40px;
-}
-.modal-Deleting {
-    z-index: 1000;
-    height: 250px;
-    width: 475px;
-    background-color: white;
-    text-align: center;
-    padding: 45px;
-    border-radius: 25px;
-    border: 2px;
-    border-style: solid;
-    position: relative;
-    margin-top: -250px;
-    margin-left: auto;
-    margin-right: auto;
-    display: none;
-}
-.deleteOptionRadios {
-    position: relative;
-    margin-top: -40px;
-    float: left;
-}
-.modal-Adding {
-    z-index: 1000;
-    height: 275px;
     width: 500px;
     background-color: white;
-    text-align: center;
     padding: 45px;
+    border: 2px solid black;
     border-radius: 25px;
-    border: 2px;
-    border-style: solid;
     position: relative;
-    margin-top: -250px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: -250px auto 0px;
     display: none;
 }
-.modal-Modify {
-    z-index: 1000;
-    height: 400px;
-    width: 500px;
-    background-color: white;
+.modal-form h1, .modal-form h2 {
+    margin: -20px 0 -30px;
     text-align: center;
-    padding: 45px;
-    border-radius: 25px;
-    border: 2px;
-    border-style: solid;
+}
+.modal-button {
     position: relative;
-    margin-top: -250px;
-    margin-left: auto;
-    margin-right: auto;
-    display: none;
-}
-.modal-Adding h1 {
-    margin-top: -20px;
-}
-.modal-Modify h1 {
-    margin-top: -20px;
-}
-.modForm .form-row .col {
-    position:relative;
-    margin-top: -40px;
-}
-#addProject {
-    position: relative;
-    margin-top: -5px;
+    margin-top: -10px;
     float: right;
+}
+#massDeleteBtn, #delAllProjectsBtn {
+    margin-bottom: -20px;
 }
 .close {
     position: relative;
-    top: -75px;
+    top: -45px;
     left: 35px;
-    transform: rotate(45deg);
-    font-size: 40px;
-    color: black;
-    cursor: pointer;
-}
-.modClose {
-    position: relative;
-    clear: both;
-    top: -90px;
-    right: -230px;
-    transform: rotate(45deg);
-    font-size: 40px;
-    color: black;
-    cursor: pointer;
-}
-.close3 {
-    position: relative;
-    top: -85px;
-    left: 180px;
-    transform: rotate(45deg);
-    font-size: 40px;
-    color: black;
-    cursor: pointer;
-}
-.cancel {
-    position: relative;
-    top: -100px;
-    left: 215px;
     transform: rotate(45deg);
     font-size: 40px;
     color: black;
