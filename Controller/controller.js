@@ -159,10 +159,8 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/getModule' , function(req,res){
     var id = req.body.id ; 
-    console.log(id);
     var data = daoUser.findModule(id);
     data.then((data ) => {
-        console.log("sssss");
         res.send(data);
     }).catch();
 })
@@ -290,11 +288,9 @@ controller.post('/updateModule' , function(req,res){
     var moduleName = req.body.mName;
     var dueDate = req.body.dueDate;
     var milestones = req.body.milestones;
-    var courseworkCompleted = req.body.courseworkCompleted;
-    var completionDate = req.body.completionDate ; 
 
-    var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : completionDate}; //T0DO - NO DUPES
-    daoUser.updateModule( module) ; 
+    var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : false , "completionDate" : ""}; //T0DO - NO DUPES
+    daoUser.updateModule(module) ; 
     res.end();
 });
 

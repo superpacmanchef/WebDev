@@ -19,7 +19,10 @@ $(document).ready(function(){
     });
 
     $(document).on("click","#modules tr td button.modify", function() {
-        document.querySelector(".modal-Modify").style.display = "block";
+        //Hide other forms
+        document.querySelector("#Adding").style.display = "none";
+        document.querySelector("#delMultipleProjects").style.display = "none";
+        document.querySelector("#delAllProjects").style.display = "none";
         $("#modifyHeading").empty();
         $.ajax({
             type : "POST",
@@ -27,27 +30,15 @@ $(document).ready(function(){
             data : JSON.stringify(data = {"id" : $(this).val()}),
             url : 'http://localhost:3000/getModule',
             success : function(response){
-                var json = response.module ;
+                var json = response.module;
                 console.log(json);
                 $('#modMName').val(json.moduleName);
                 $('#modProjectTitle').val(json.projectTitle);
-                $("#modifyHeading").append("Modify " + json.projectTitle)
+                $("#modifyHeading").append("Modify " + json.projectTitle);
                 $('#modDueDate').val(json.dueDate);
                 $('#modNoOfMilestones').val(json.milestones.length);
                 $('#modProject').val(json.module_id);
-                $('#modComDate').val(json.completionDate);
-                if(json.courseworkCompleted == true){
-                    $('#modCompleted').prop('checked', true);
-                }else{
-                    $('#modCompleted').prop('checked', false);
-                }
-
-                //DO THIS
-                if(document.getElementById('modCompleted').checked){
-                    document.querySelector(".modCOM").style.display = "block";
-                }else{
-                    document.querySelector(".modCOM").style.display = "block";
-                }
+                document.querySelector("#Modify").style.display = "block"; //Display modify form
             }
       });
 
