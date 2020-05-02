@@ -147,7 +147,9 @@
         <label class="form-check-label" for="CompletedProjects"> Select if you wish to delete all Completed Projects</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" id="DeleteAllProjects" name="deleteOptions" value="DeleteAllProjects"> 
+
+        <input class="form-check-input" type="radio" id="DeleteAllProjects" name="deleteOptions" value="DeleteAllProjects">
+
         <label class="form-check-label" for="DeleteAllProjects"> Select if you wish to delete all projects</label>
     </div><br><br>
     <button class="btn btn-danger" type="submit" id="massDeleteBtn">Delete</button>
@@ -159,6 +161,15 @@
     <p>Are you sure you want to delete all of your projects? <br> If so please enter "Delete" into the input box to proceed</p>
     <input type="text" class="form-control" id="deleteEntry" name="deleteEntry" placeholder="Delete"><br>
     <button class="btn btn-danger" type="submit" id="delAllProjectsBtn">Confirm Mass Delete</button>
+
+</div>
+<div id="delCompletedProjects" class="modal-form text-center">
+    <div class="close">+</div>
+    <h2>Delete Confirmation</h2><br><br>
+    <p>Are you sure you want to delete your completed projects? <br> If so please enter "Delete" into the input box to proceed</p>
+    <input type="text" class="form-control" id="deleteCompletedEntry" name="deleteCompletedEntry" placeholder="Delete"><br>
+    <button class="btn btn-danger" type="submit" id="delCompletedProjectsBtn">Confirm Mass Delete</button>
+
 </div>
 
 </body>

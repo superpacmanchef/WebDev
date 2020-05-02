@@ -192,6 +192,25 @@ class  DAO  {
     }) 
     }
 
+    removeCompletedModules(id){
+        return new Promise((resolve, reject) => {
+        var t = this.searchByID(id);
+            t.then((data) => {
+                if(data.module.length >= 0) {
+                    for (var x = 0; x < data.module.length; x++) {
+                        console.log(data.module[x].courseworkCompleted);
+                        if (data.module[x].courseworkCompleted == true) {
+                            console.log(data.module[x]);
+                            this.removeModule(id, data.module[x].module_id);
+                        }
+                    }
+                    resolve("done");
+                }else{
+                    reject("none");
+                }
+            });
+        });
+    }
 }
 
 module.exports  =  DAO;

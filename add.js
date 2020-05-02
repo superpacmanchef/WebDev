@@ -87,22 +87,20 @@ $(document).ready(function(){
         
     })
 
-
     $("#massDeleteBtn").click(function(){
         var radioValue = $("input[name='deleteOptions']:checked").val(); //Get radio button selection
-
+        console.log(radioValue);
         //Execute something depending on what the user has selected
         if(radioValue == "CompletedProjects") {
             document.querySelector('#delMultipleProjects').style.display = "none";
-            alert("Completed Projects")//THIS NEEDS TO BE DONE
+            document.querySelector("#delCompletedProjects").style.display = "block";
         } else if(radioValue == "DeleteAllProjects") {
             document.querySelector('#delMultipleProjects').style.display = "none";
-                document.querySelector("#delAllProjects").style.display = "block";
+            document.querySelector("#delAllProjects").style.display = "block";
         } else {
             alert("You didnt select an option")
         }
     })
-
 
     $("#delAllProjectsBtn").click(function(){
         var deleteValue = $("#deleteEntry").val(); //Get user input
@@ -115,9 +113,32 @@ $(document).ready(function(){
                 contentType : "application/json",
                 url : 'http://localhost:3000/delAll',
                 success : function(){
-                    console.log("s");
                     getSorted();
                     document.querySelector("#delAllProjects").style.display = "none";
+                },
+                error : function(error){
+                    console.log("error");
+                }
+            })
+        }
+    })
+
+    $('#delCompletedProjectsBtn').click(function () {
+        var deleteValue = $("#deleteCompletedEntry").val(); //Get user input
+        console.log(deleteValue);
+        //Validate that user input matches "delete"
+        if(deleteValue.toLowerCase() == "delete") {
+            //Delete all the projects
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : 'http://localhost:3000/delCompleted',
+                success : function(data){
+                    document.querySelector("#delCompletedProjects").style.display = "none";
+                    if(data != "done"){
+                        alert("No Projects to be Deleted");
+                    }
+                    getSorted();
                 },
                 error : function(error){
                     console.log("error");
