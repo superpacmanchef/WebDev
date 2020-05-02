@@ -87,6 +87,9 @@ label {
     margin-top: -10px;
     float: right;
 }
+#modCompleted {
+    cursor: pointer;
+}
 #massDeleteBtn, #delAllProjectsBtn {
     margin-bottom: -20px;
 }

@@ -291,8 +291,17 @@ controller.post('/updateModule' , function(req,res){
     var moduleName = req.body.mName;
     var dueDate = req.body.dueDate;
     var milestones = req.body.milestones;
+    var courseworkCompleted = req.body.courseworkCompleted;
+    if(courseworkCompleted == true) {
+        var date = new Date();
+        var formattedDate = ('0' + date.getDate()).slice(-2);
+        var formattedMonth = ('0' + (date.getMonth() + 1)).slice(-2);
+        var formattedYear = date.getFullYear().toString();
+        var dateString = formattedDate + '/' + formattedMonth + '/' + formattedYear;
+        var completionDate = dateString;
+    }
 
-    var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : false , "completionDate" : ""}; //T0DO - NO DUPES
+    var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : completionDate}; //T0DO - NO DUPES
     daoUser.updateModule(module) ; 
     res.end();
 });

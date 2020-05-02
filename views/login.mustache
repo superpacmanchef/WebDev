@@ -20,9 +20,9 @@
     <label for="psw"><b>Password</b></label> <br>
     <input type="password" placeholder="Password" name="psw" required>
     </div>
-     <div class="form-group">
-     <button class="btn btn-secondary" type="button" id="register" onclick="window.location.href = '/register';">Register</button>
-    <button class="btn btn-secondary" type="submit">Login</button>
+    <div class="form-group">
+        <button class="btn btn-warning btnRegister" type="button" id="register" onclick="window.location.href = '/register';">Register</button>
+        <button class="btn btn-primary btnLogin" type="submit">Login</button>
     </div>
     </div>
    </form>
@@ -44,7 +44,6 @@
         } 
 
         .modal-contents-login img {
-            height: 175px;
             width: 175px;
         }
 
@@ -66,5 +65,14 @@
             text-decoration: none;
         }
 
+        .btnRegister, .btnLogin {
+            color: white;
+            background-color: #6c757d;
+            border-color: #545b62;
+        }
+
+        .btnRegister:hover {
+            color: white;
+        }
    </div>
 </html>

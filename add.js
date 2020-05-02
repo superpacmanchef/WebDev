@@ -132,7 +132,13 @@ $(document).ready(function(){
         var moduleName = $('#modMName').val();
         var noOfMilestones = $('#modNoOfMilestones').find(':selected').text();
         var dueDate = $('#modDueDate').val();
-        var milestones = [] ;
+        var milestones = [];
+        if(document.getElementById('modCompleted').checked) {
+            var courseworkCompleted = true;
+        }
+        else {
+            var courseworkCompleted = false;
+        }
 
         for (var x = 0 ; x < noOfMilestones ; x++){
             var milestoneStep = x + 1; //Use 'human' counting, start from 1
@@ -142,7 +148,7 @@ $(document).ready(function(){
             milestones[x] = milestone ; 
         }
 
-        var data = {"module_id" : module_id ,"projectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : false , "completionDate" : ""} ; 
+        var data = {"module_id" : module_id ,"projectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : ""} ; 
         
 
         $.ajax({
