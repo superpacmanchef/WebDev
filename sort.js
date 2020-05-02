@@ -40,7 +40,7 @@ function whatTable(sort){
             setTableEarlySorted();
             break;
         case "4":
-            //setTableLate()
+            setTableLate()
             break;
         case "5":
             setTableCompleted();
@@ -70,6 +70,13 @@ function setTableSorted(){
         })
 }
 
+function setTableLate() {
+    var sorted = getLatestModules();
+        sorted.then((data) => {
+            $('#modules').empty();
+            displayTable(data);
+        });
+}
 //Gets Completed Projects data and then runs function to display data
 function setTableCompleted(){
     console.log("setTableCompleted");
@@ -103,7 +110,7 @@ function setTableDescSorted() {
 
 //Gets ealiest due date sorted data and then runs fucntuion to display data.
 function setTableEarlySorted() {
-    var sorted = getLatestModules();
+    var sorted = getEarliestModules();
     sorted.then((data) => {
 
         $('#modules').empty();
@@ -210,9 +217,25 @@ function getLatestModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/sortEDueDate',
+            url : 'http://localhost:3000/sortLDueDate',
             success : function(data){
                 resolve(data);               
+            },
+            error : function(error){
+                reject(error)
+            }
+        })
+    })
+}
+
+function getEarliestModules(){
+    return new Promise((resolve , reject) => {
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : 'http://localhost:3000/sortEDueDate',
+            success : function(data){
+                resolve(data);
             },
             error : function(error){
                 reject(error)

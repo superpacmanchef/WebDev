@@ -15,34 +15,39 @@ $(document).ready(function(){
 
     //Displays new module form 
     $("#newAdd").click(function(){
-        document.querySelector(".modal-Adding").style.display = "block";
+        closeForms();
+        $('#mName').val("");
+        $('#projectTitle').val("");
+        $('#noOfMilestones').val(1);
+        $('#dueDate').val("");
+        document.querySelector("#Adding").style.display = "block";
     })
 
     //Displays Mass Deleting option form
     $("#delMul").click(function(){
-        document.querySelector(".modal-Deleting").style.display = "block";
+        closeForms();
+        document.querySelector("#delMultipleProjects").style.display = "block";
     })
 
-    //Close new module form
-    document.querySelector('.close').addEventListener("click", function() {
-        document.querySelector('.modal-Adding').style.display = "none" ; 
-    });
+    //Close module forms (One Function - Has to apply function to all close buttons, to close all modals)
+    const closeListener = document.querySelectorAll(".close");
+    for (let i = 0; i < closeListener.length; i++) {
+        closeListener[i].addEventListener("click", function() {
+            closeForms();
+        });
+    }
+    function closeForms() {
+        const modalForms = document.querySelectorAll(".modal-form");
+        for (let j = 0; j < modalForms.length; j++) {
+            modalForms[j].style.display = "none";
+        }
+    }
 
-    
-    //Close new module form
-    document.querySelector('.modClose').addEventListener("click", function() {
-    document.querySelector('.modal-Modify').style.display = "none";
-    });
-
-    //Close Mass Deletion option form
-    document.querySelector('.cancel').addEventListener("click", function() {
-        document.querySelector('.modal-Deleting').style.display = "none";
-    });
 
     //Close Delete All Projects form
-    document.querySelector('.close3').addEventListener("click", function() {
-        document.querySelector('.modal-del').style.display = "none";
-        document.querySelector(".modal-Deleting").style.display = "block";
+    document.querySelector('#delAllProjects .close').addEventListener("click", function() {
+        document.querySelector('#delAllProjects').style.display = "none";
+        document.querySelector("#delMultipleProjects").style.display = "block";
     });
 
 
@@ -71,7 +76,7 @@ $(document).ready(function(){
                 data : JSON.stringify(data),
                 url : 'http://localhost:3000/add',
                 success : function(data){
-                    document.querySelector(".modal-Adding").style.display = "none";
+                    document.querySelector("#Adding").style.display = "none";
                     getSorted();
                 },
                 error : function(error){
@@ -82,22 +87,20 @@ $(document).ready(function(){
         
     })
 
-
     $("#massDeleteBtn").click(function(){
         var radioValue = $("input[name='deleteOptions']:checked").val(); //Get radio button selection
-
+        console.log(radioValue);
         //Execute something depending on what the user has selected
         if(radioValue == "CompletedProjects") {
-            alert("Completed Projects")
+            document.querySelector('#delMultipleProjects').style.display = "none";
+            document.querySelector("#delCompletedProjects").style.display = "block";
         } else if(radioValue == "DeleteAllProjects") {
-            document.querySelector('.modal-Deleting').style.display = "none";
-                document.querySelector(".modal-del").style.display = "block";
+            document.querySelector('#delMultipleProjects').style.display = "none";
+            document.querySelector("#delAllProjects").style.display = "block";
         } else {
             alert("You didnt select an option")
         }
-        
     })
-
 
     $("#delAllProjectsBtn").click(function(){
         var deleteValue = $("#deleteEntry").val(); //Get user input
@@ -110,19 +113,38 @@ $(document).ready(function(){
                 contentType : "application/json",
                 url : 'http://localhost:3000/delAll',
                 success : function(){
-                    console.log("s");
                     getSorted();
-                    document.querySelector(".modal-del").style.display = "none";
+                    document.querySelector("#delAllProjects").style.display = "none";
                 },
                 error : function(error){
                     console.log("error");
                 }
             })
-        } else {
-            console.log("Didny dae it");
         }
-        
+    })
 
+    $('#delCompletedProjectsBtn').click(function () {
+        var deleteValue = $("#deleteCompletedEntry").val(); //Get user input
+        console.log(deleteValue);
+        //Validate that user input matches "delete"
+        if(deleteValue.toLowerCase() == "delete") {
+            //Delete all the projects
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : 'http://localhost:3000/delCompleted',
+                success : function(data){
+                    document.querySelector("#delCompletedProjects").style.display = "none";
+                    if(data != "done"){
+                        alert("No Projects to be Deleted");
+                    }
+                    getSorted();
+                },
+                error : function(error){
+                    console.log("error");
+                }
+            })
+        }
     })
 
     $('#modProject').click(function() {
@@ -131,14 +153,7 @@ $(document).ready(function(){
         var moduleName = $('#modMName').val();
         var noOfMilestones = $('#modNoOfMilestones').find(':selected').text();
         var dueDate = $('#modDueDate').val();
-        var completionDate = $('#modComDate').val();
         var milestones = [] ;
-        if(document.getElementById('modCompleted').checked){
-            var courseworkCompleted = true ;
-        }else {
-            var courseworkCompleted = false ;
-        }
-        console.log(courseworkCompleted);
 
         for (var x = 0 ; x < noOfMilestones ; x++){
             var milestoneStep = x + 1; //Use 'human' counting, start from 1
@@ -148,7 +163,7 @@ $(document).ready(function(){
             milestones[x] = milestone ; 
         }
 
-        var data = {"module_id" : module_id ,"projectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : completionDate} ; 
+        var data = {"module_id" : module_id ,"projectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : false , "completionDate" : ""} ; 
         
 
         $.ajax({
@@ -157,7 +172,7 @@ $(document).ready(function(){
             data : JSON.stringify(data),
             url : 'http://localhost:3000/updateModule',
             success : function(){
-                document.querySelector(".modal-Modify").style.display = "none";
+                document.querySelector("#Modify").style.display = "none";
                 getSorted();
             },
             error : function(error){

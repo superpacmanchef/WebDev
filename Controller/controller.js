@@ -51,7 +51,6 @@ controller.get('/home', function(req, res) {
 }
 });
 
-
 controller.get('/view', function(req, res) {
     var q = req.query.view ;
     var m = daoUser.findModule(q);
@@ -63,8 +62,6 @@ controller.get('/view', function(req, res) {
         }
     });
 });
-
-
 
 controller.post('/register', function(req, res) {
     const fname = req.body.fname;
@@ -88,7 +85,6 @@ controller.post('/register', function(req, res) {
 
 });
 
-
 controller.post('/regCheck', function(req, res) {
     const uname = req.body.uname;
     var t = daoUser.searchByName(uname);
@@ -104,7 +100,6 @@ controller.post('/regCheck', function(req, res) {
 
 });
 
-
 controller.post('/add', function(req, res) {
     bcrypt.genSalt(saltRounds , function(err , salt){ 
     var projectTitle = req.body.projectTitle;
@@ -117,7 +112,6 @@ controller.post('/add', function(req, res) {
     res.end();
     });
 });
-
 
 controller.post('/', function(req, res) {
     const uname = req.body.uname;
@@ -162,10 +156,8 @@ controller.post('/getModules' , function(req,res){
 
 controller.post('/getModule' , function(req,res){
     var id = req.body.id ; 
-    console.log(id);
     var data = daoUser.findModule(id);
     data.then((data ) => {
-        console.log("sssss");
         res.send(data);
     }).catch();
 })
@@ -260,11 +252,43 @@ controller.post('/sortEDueDate', function(req, res){
 
         console.log(EarliestDueDateA);
         EarliestDueDateA.sort(); 
-        console.log(EarliestDueDateA);
+        console.log(EarliestDueDateA + "261");
 
         for(var y = 0; y < data.module.length; y++){
             for(var i = 0; i < data.module.length; i++) {
                 if(data.module[y].dueDate == EarliestDueDateA[i]) {
+                    moduleArray[i] = data.module[y]
+                }
+            }
+        }
+
+        data.module = moduleArray;
+        res.send(data);
+
+    })
+})
+
+controller.post('/sortLDueDate', function(req, res){
+    var LatestDueDateA = new Array();
+    var moduleArray = new Array();
+
+    var data = daoUser.searchByID(sessionData);
+
+    data.then((data) => {
+
+        for(var x = 0; x < data.module.length; x++) {
+            var pushingProject = data.module[x].dueDate;
+            LatestDueDateA.push(pushingProject);
+        }
+
+        console.log(LatestDueDateA);
+        LatestDueDateA.sort();
+        console.log(LatestDueDateA + "292");
+        LatestDueDateA.reverse();
+
+        for(var y = 0; y < data.module.length; y++){
+            for(var i = 0; i < data.module.length; i++) {
+                if(data.module[y].dueDate == LatestDueDateA[i]) {
                     moduleArray[i] = data.module[y]
                 }
             }
@@ -281,9 +305,17 @@ controller.post('/log', function(req, res) {
     res.redirect('/');
 })
 
-controller.post('/delAll', function(res,res) {
+controller.post('/delAll', function(req,res) {
     daoUser.removeAllModules(sessionData);
     res.end();
+});
+
+controller.post('/delCompleted', function (req , res ){
+    console.log("com");
+    var t = daoUser.removeCompletedModules(sessionData);
+    t.then((data) => {
+        res.send(data);
+    });
 });
 
 controller.post('/updateModule' , function(req,res){
@@ -293,11 +325,9 @@ controller.post('/updateModule' , function(req,res){
     var moduleName = req.body.mName;
     var dueDate = req.body.dueDate;
     var milestones = req.body.milestones;
-    var courseworkCompleted = req.body.courseworkCompleted;
-    var completionDate = req.body.completionDate ; 
 
-    var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : completionDate}; //T0DO - NO DUPES
-    daoUser.updateModule( module) ; 
+    var module = {"module_id" : module_id, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate,  "milestones" : milestones , "courseworkCompleted" : false , "completionDate" : ""}; //T0DO - NO DUPES
+    daoUser.updateModule(module) ; 
     res.end();
 });
 
