@@ -38,6 +38,13 @@ $(document).ready(function(){
                 $('#modDueDate').val(json.dueDate);
                 $('#modNoOfMilestones').val(json.milestones.length);
                 $('#modProject').val(json.module_id);
+                if(json.courseworkCompleted == true) {
+                    $('#modCompleted').prop('checked', true);
+                }
+                else {
+                    $('#modCompleted').prop('checked', false);
+                }
+                
                 document.querySelector("#Modify").style.display = "block"; //Display modify form
             }
       });
