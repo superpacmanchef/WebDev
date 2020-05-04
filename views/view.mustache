@@ -23,38 +23,29 @@
 </head>
 <body>
 
-
-<div id= "Mid" value = {{module_id}}> Module ID :  {{module_id}}</div></br>
-Project Tile :  {{projectTitle}}</br>
-Module name :  {{moduleName}}</br>
-Due date :   {{dueDate}}</br>
-Completion Date: {{completionDate}}</br>
-Coursework Complete : {{courseworkCompleted}}</br>
-
-{{#milestones}}</br>
-<button class="milestonesBtn {{milestoneCompleted}}" id = "{{milestoneStep}}" value = {{milestone_id}}>{{Desc}}</button>
-</div>
-{{/milestones}}
-
-<style>
-        .milestonesBtn{
-            height: 100px;
-            width: 200px;
-            background-color: white;
-            border: none;
-            border-bottom: 1px solid black;
-        }
-
-
-
-
-</style>
-
-
-
-
-
-
+<img src="../img/back.png"></img>
+    <div class= "ViewForm">
+        <div id= "Mid" value = {{module_id}}>
+            Module ID :  {{module_id}}
+        </div>
+        <div class= "InnerViewText">
+            <h4>Project Details</h2>
+            <b>Project Title :</b>  {{projectTitle}}</br>
+            <b>Module name :</b>  {{moduleName}}</br>
+            <b>Due date :</b>   {{dueDate}}</br>
+            <b>Completion Date:</b> {{completionDate}}</br>
+            <b>Coursework Complete :</b> {{courseworkCompleted}}</br></br>
+        </div>
+        <div class= "InnerViewMilestones">
+            <h4>Project Milestones</h2>
+            <p>
+                To complete a milestone, simply click on one of the milestone buttons shown.
+            </p>
+            {{#milestones}}
+            <button class="milestonesBtn {{milestoneCompleted}}" id = "{{milestoneStep}}" value = {{milestone_id}}>{{Desc}}</button>
+            {{/milestones}}
+        </div>
+    </div>
 
 </body>
 </html>

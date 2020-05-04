@@ -1,8 +1,54 @@
+.milestonesBtn{
+    height: 100px;
+    width: 15%;
+    background-color: white;
+    border: none;
+}
+
 .milestonesBtn.true{
-    background-color: green;
+    background-color: #28a745;;
 }
 
 .milestonesBtn.false{
     background-color: white;
 }
 
+#Mid    {
+    display: none;
+}
+
+.ViewForm   {
+    border: 2px solid black;
+    border-radius: 25px;
+    position: relative;
+    width: 1200px;
+    z-index: 1000;
+    margin: 45px auto;
+    padding: 20px 45px;
+}
+
+.InnerViewText  {
+    margin: 0px auto;
+    /*background-color: red;*/
+}
+
+.InnerViewMilestones    {
+    margin: 0px auto;
+    width: 100%;
+    /*background-color:blue;*/
+}
+
+.InnerViewMilestones button {
+    padding: 0;
+    width: 200px;
+    border: 2px solid black;
+}
+
+h1  {
+    text-align: center;
+}
+
+img {
+    max-width: 50px;
+    max-height: 50px;
+}
