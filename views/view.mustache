@@ -23,7 +23,9 @@
 </head>
 <body>
 
-<img src="../img/back.png"></img>
+    {{! Back button image, onclick leads back to home page since browser back button has tendency to
+        return to login page.}}
+    <img src="../img/back.png" onclick="window.location.href = '/home'"></img>
     <div class= "ViewForm">
         <div id= "Mid" value = {{module_id}}>
             Module ID :  {{module_id}}

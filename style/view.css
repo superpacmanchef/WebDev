@@ -29,13 +29,11 @@
 
 .InnerViewText  {
     margin: 0px auto;
-    /*background-color: red;*/
 }
 
 .InnerViewMilestones    {
     margin: 0px auto;
     width: 100%;
-    /*background-color:blue;*/
 }
 
 .InnerViewMilestones button {
@@ -51,4 +49,7 @@ h1  {
 img {
     max-width: 50px;
     max-height: 50px;
+    float: left;
+    position: relative;
+    left: 16px;
 }

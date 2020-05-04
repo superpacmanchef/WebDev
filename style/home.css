@@ -12,9 +12,15 @@ form.logOutForm {
     right: 0px;
     top: 0px;
     padding: 4px;
+    border: 2px solid white;
+    border-radius: 6px;
+}
+
+form.LogOutForm:hover {
     border: 2px solid rgb(179, 179, 179);
     border-radius: 6px;
 }
+
 #modules {
     border: none;
 }
