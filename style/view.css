@@ -52,4 +52,5 @@ img {
     float: left;
     position: relative;
     left: 16px;
+    cursor: pointer;
 }

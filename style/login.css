@@ -1,0 +1,45 @@
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .modal-contents-login { 
+        height: 475px;
+        width: 525px;
+        background-color: white;
+        text-align: center;
+        padding: 45px;
+        border-radius: 25px;
+        border: 2px;
+        border-style: solid;
+        margin-top: 225px;
+        margin-left: auto;
+        margin-right: auto;
+        } 
+
+        .modal-contents-login img {
+            width: 175px;
+        }
+
+        .modal-contents-login h1 {
+            margin-top: -20px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btnRegister, .btnLogin {
+            color: white;
+            background-color: #6c757d;
+            border-color: #545b62;
+        }
+
+        .btnRegister:hover {
+            color: white;
+        }
