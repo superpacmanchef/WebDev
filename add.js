@@ -167,7 +167,7 @@ $(document).ready(function(){
             milestones[x] = milestone ; 
         }
 
-        var data = {"module_id" : module_id ,"projsectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : ""} ; 
+        var data = {"module_id" : module_id ,"projectTitle" :projectTitle , "mName" : moduleName, "dueDate" : dueDate,"milestones" : milestones , "courseworkCompleted" : courseworkCompleted , "completionDate" : ""} ; 
         
 
         $.ajax({
