@@ -5,7 +5,7 @@ $(document).ready(function(){
             type : "POST",
             contentType : "application/json",
             data : JSON.stringify(data = {"id" : $(this).val()}),
-            url : 'http://localhost:3000/del',
+            url : 'https://webdev2-coursework.herokuapp.com/del',
             success : function(){
                 getSorted();
             }
@@ -74,7 +74,7 @@ $(document).ready(function(){
                 type : "POST",
                 contentType : "application/json",
                 data : JSON.stringify(data),
-                url : 'http://localhost:3000/add',
+                url : 'https://webdev2-coursework.herokuapp.com/add',
                 success : function(data){
                     document.querySelector("#Adding").style.display = "none";
                     getSorted();
@@ -111,7 +111,7 @@ $(document).ready(function(){
             $.ajax({
                 type : "POST",
                 contentType : "application/json",
-                url : 'http://localhost:3000/delAll',
+                url : 'https://webdev2-coursework.herokuapp.com/delAll',
                 success : function(){
                     getSorted();
                     document.querySelector("#delAllProjects").style.display = "none";
@@ -132,7 +132,7 @@ $(document).ready(function(){
             $.ajax({
                 type : "POST",
                 contentType : "application/json",
-                url : 'http://localhost:3000/delCompleted',
+                url : 'https://webdev2-coursework.herokuapp.com/delCompleted',
                 success : function(data){
                     document.querySelector("#delCompletedProjects").style.display = "none";
                     if(data != "done"){
@@ -176,7 +176,7 @@ $(document).ready(function(){
             type : "POST",
             contentType : "application/json",
             data : JSON.stringify(data),
-            url : 'http://localhost:3000/updateModule',
+            url : 'https://webdev2-coursework.herokuapp.com/updateModule',
             success : function(){
                 document.querySelector("#Modify").style.display = "none";
                 getSorted();

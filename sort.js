@@ -124,7 +124,7 @@ function getUnsortedModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/getModules',
+            url : 'https://webdev2-coursework.herokuapp.com/getModules',
             success : function(data){
                 resolve(data);               
             },
@@ -139,7 +139,7 @@ function showCompleted(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/getModules',
+            url : 'https://webdev2-coursework.herokuapp.com/getModules',
             success : function(data){
                 var module = [];
                 var number = 0;
@@ -160,7 +160,7 @@ function showUncompleted(){
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : 'http://localhost:3000/getModules',
+        url : 'https://webdev2-coursework.herokuapp.com/getModules',
         success : function(data){
             var module = [];
             var number = 0;
@@ -183,7 +183,7 @@ function getAlphModules(){
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : 'http://localhost:3000/sort',
+        url : 'https://webdev2-coursework.herokuapp.com/sort',
         success : function(data){
             resolve(data);               
         },
@@ -200,7 +200,7 @@ function getDescModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/sortD',
+            url : 'https://webdev2-coursework.herokuapp.com/sortD',
             success : function(data){
                 resolve(data);               
             },
@@ -217,7 +217,7 @@ function getLatestModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/sortLDueDate',
+            url : 'https://webdev2-coursework.herokuapp.com/sortLDueDate',
             success : function(data){
                 resolve(data);               
             },
@@ -233,7 +233,7 @@ function getEarliestModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/sortEDueDate',
+            url : 'https://webdev2-coursework.herokuapp.com/sortEDueDate',
             success : function(data){
                 resolve(data);
             },

@@ -13,7 +13,7 @@ $(document).ready(function(){
             type : "POST",
             contentType : "application/json",
             data : JSON.stringify(data = {"id" : $(this).val()}),
-            url : 'http://localhost:3000/del',
+            url : 'https://webdev2-coursework.herokuapp.com/del',
             success : function(){
                 getSorted();
             }
@@ -73,7 +73,7 @@ $(document).ready(function(){
                 type : "POST",
                 contentType : "application/json",
                 data : JSON.stringify(data),
-                url : 'http://localhost:3000/add',
+                url : 'https://webdev2-coursework.herokuapp.com/add',
                 success : function(data){
                     document.querySelector(".modal-Adding").style.display = "none";
                     getSorted();
@@ -112,7 +112,7 @@ $(document).ready(function(){
             $.ajax({
                 type : "POST",
                 contentType : "application/json",
-                url : 'http://localhost:3000/delAll',
+                url : 'https://webdev2-coursework.herokuapp.com/delAll',
                 success : function(){
                     getSorted();
                     document.querySelector(".modal-del").style.display = "none";
@@ -212,7 +212,7 @@ function getUnsortedModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/getModules',
+            url : 'https://webdev2-coursework.herokuapp.com/getModules',
             success : function(data){
                 resolve(data);               
             },
@@ -229,7 +229,7 @@ function getAlphModules(){
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : 'http://localhost:3000/sort',
+        url : 'https://webdev2-coursework.herokuapp.com/sort',
         success : function(data){
             resolve(data);               
         },
@@ -246,7 +246,7 @@ function getDescModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/sortD',
+            url : 'https://webdev2-coursework.herokuapp.com/sortD',
             success : function(data){
                 resolve(data);               
             },
@@ -263,7 +263,7 @@ function getLatestModules(){
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : 'http://localhost:3000/sortEDueDate',
+            url : 'https://webdev2-coursework.herokuapp.com/sortEDueDate',
             success : function(data){
                 resolve(data);               
             },

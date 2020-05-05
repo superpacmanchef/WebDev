@@ -6,7 +6,7 @@ $(document).ready(function(){
             type : "POST",
             contentType : "application/json",
             data : JSON.stringify(data = {"id" : $(this).val()}),
-            url : 'http://localhost:3000/completeCW',
+            url : 'https://webdev2-coursework.herokuapp.com/completeCW',
             success : function(){
                 getSorted();
             }
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
     $(document).on("click","#modules tr td button.view", function() {
         var t  =$(this).val();
-        window.location.replace("http://localhost:3000/view?view=" + t);
+        window.location.replace("https://webdev2-coursework.herokuapp.com/view?view=" + t);
     });
 
     $(document).on("click","#modules tr td button.modify", function() {
@@ -28,7 +28,7 @@ $(document).ready(function(){
             type : "POST",
             contentType : "application/json",
             data : JSON.stringify(data = {"id" : $(this).val()}),
-            url : 'http://localhost:3000/getModule',
+            url : 'https://webdev2-coursework.herokuapp.com/getModule',
             success : function(response){
                 var json = response.module;
                 console.log(json);

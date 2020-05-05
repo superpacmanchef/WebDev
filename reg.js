@@ -43,7 +43,7 @@ function reg(){
         data : JSON.stringify(data),
         url : 'https://webdev2-coursework.herokuapp.com/register',
         success : function(data){
-            window.location.replace("http://localhost:3000/");
+            window.location.replace("https://webdev2-coursework.herokuapp.com/");
         },
         error : function(error){
             

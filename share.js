@@ -6,7 +6,7 @@ $(document).ready(function(){
             type : "GET",
             contentType : "application/json",
             data : JSON.stringify(data),
-            url : 'http://localhost:3000/view',
+            url : 'https://webdev2-coursework.herokuapp.com/view',
             success : function(data){
                
             },
