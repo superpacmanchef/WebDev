@@ -8,7 +8,7 @@ $('#reg').click(function() {
         type : "POST",
         contentType : "application/json",
         data : JSON.stringify(data),
-        url : 'http://localhost:3000/regCheck',
+        url : 'https://webdev2-coursework.herokuapp.com/regCheck',
         success : function(dataa)
         {       console.log(dataa);
                 if(dataa == "true"){
@@ -41,7 +41,7 @@ function reg(){
         type : "POST",
         contentType : "application/json",
         data : JSON.stringify(data),
-        url : 'http://localhost:3000/register',
+        url : 'https://webdev2-coursework.herokuapp.com/register',
         success : function(data){
             window.location.replace("http://localhost:3000/");
         },
