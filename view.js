@@ -9,7 +9,7 @@ $(document).ready(function() {
         type : "POST",
         contentType : "application/json",
         data : JSON.stringify(data),
-        url : 'http://localhost:3000/completeMilestone',
+        url : 'https://webdev2-coursework.herokuapp.com/completeMilestone',
         success : function(data){
             if(data == true){
                 $('#' + id).removeClass('false').addClass('true');
