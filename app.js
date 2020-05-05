@@ -2,13 +2,13 @@ var express = require("express"),
 path = require("path"),
 mustache = require("mustache-express"),
 controller = require('./Controller/controller.js') ;
-
-
+const session = require('express-session');
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 app.set('port' , process.env.PORT || 3000);
-app.engine('mustache' , mustache()) ; 
+app.engine('mustache' , mustache()) ;
+app.use(session({secret:'XASDASDAAA'}));
 
 app.set('view engine' , 'mustache');
 

@@ -5,23 +5,21 @@ const saltRounds = 10 ;
 let DAOUser = require('../Model/users.js');
 var dbFileUser = 'User.nedb.db';
 let daoUser = new DAOUser(dbFileUser);
+let sessionData ;
 
-var sessionData = "";
 
 
 //renders Login Page
 controller.get("/", function(req, res) {
-    if(sessionData == ""){
+
+    sessionData = req.session ; 
+    if(sessionData.username == undefined){
     res.render('login');
     }else{
-        var t = daoUser.searchByID(sessionData);
-
-    t.then((entry) => {
-        console.log(entry);
-        console.log(sessionData + "32");
-            res.redirect('/home');
-        });
+        res.redirect('/home');
     }
+
+    
 });
     
 
@@ -32,16 +30,13 @@ controller.get('/register', function(req, res) {
 
 //Renders Home Page
 controller.get('/home', function(req, res) {
-    if(sessionData == ""){
+    sessionData = req.session ;
+    if(sessionData.username == null || sessionData.username == undefined){
         res.redirect('/');
     }else{
-    var t = daoUser.searchByID(sessionData);
-
+    var t = daoUser.searchByID(sessionData.username);
     t.then((entry) => {
-        console.log(entry);
-        console.log(sessionData + "32");
         if (entry.username == null) {
-
         } else {
             res.render('home', { "uname": entry.username ,
                                   "course": entry.course
@@ -101,6 +96,8 @@ controller.post('/regCheck', function(req, res) {
 });
 
 controller.post('/add', function(req, res) {
+    sessionData = req.session ;
+    console.log("ss");
     bcrypt.genSalt(saltRounds , function(err , salt){ 
     var projectTitle = req.body.projectTitle;
     var moduleName = req.body.mName;
@@ -108,7 +105,7 @@ controller.post('/add', function(req, res) {
     var milestones = req.body.milestones;
     
     var module = {"module_id" : salt, "projectTitle" : projectTitle, "moduleName" : moduleName, "dueDate" : dueDate, "completionDate" : "", "courseworkCompleted" : false , "milestones" : milestones}; //T0DO - NO DUPES
-    daoUser.insertModule(sessionData , module);
+    daoUser.insertModule(sessionData.username , module);
     res.end();
     });
 });
@@ -117,14 +114,13 @@ controller.post('/', function(req, res) {
     const uname = req.body.uname;
     const pword = req.body.psw;
     var t = daoUser.searchByName(uname);
-
     t.then((entry) => {
             if (entry == null) {
                 console.log("none there");
             } else {
                 bcrypt.compare(pword , entry.password , function(err,result){
                     if(result){
-                        sessionData = entry._id ;
+                        req.session.username = entry._id ;
                         res.redirect('/home');
                     }else {
                         res.render('/');
@@ -148,7 +144,8 @@ controller.post('/', function(req, res) {
 
 
 controller.post('/getModules' , function(req,res){
-    var data = daoUser.searchByID(sessionData);
+    sessionData = req.session 
+    var data = daoUser.searchByID(sessionData.username);
     data.then((data) => {
         res.send(data);
     })
@@ -163,15 +160,17 @@ controller.post('/getModule' , function(req,res){
 })
 
 controller.post('/del', function(req, res) {
+    sessionData = req.session 
     const module_id = req.body.id;
-    daoUser.removeModule(sessionData, module_id) ;
+    daoUser.removeModule(sessionData.username, module_id) ;
     res.redirect('/home') ; 
 
 });
 
 controller.post('/completeCW', function(req, res) {
+    sessionData = req.session 
     const module_id = req.body.id;
-    daoUser.completeModule(sessionData , module_id) ;
+    daoUser.completeModule(sessionData.username , module_id) ;
     res.redirect('/home') ; 
 
 });
@@ -179,8 +178,8 @@ controller.post('/completeCW', function(req, res) {
 controller.post('/sort', function(req, res) {
     var projectTitleA = new Array();
     var moduleArray = new Array();
-
-    var data = daoUser.searchByID(sessionData);
+    sessionData = req.session ;
+    var data = daoUser.searchByID(sessionData.username);
     
     data.then((data) => {
 
@@ -211,8 +210,8 @@ controller.post('/sort', function(req, res) {
 controller.post('/sortD', function(req, res) {
     var projectTitleA = new Array();
     var moduleArray = new Array();
-
-    var data = daoUser.searchByID(sessionData);
+    sessionData = req.session ;
+    var data = daoUser.searchByID(sessionData.username);
 
     data.then((data) => {
         
@@ -240,8 +239,8 @@ controller.post('/sortD', function(req, res) {
 controller.post('/sortEDueDate', function(req, res){
     var EarliestDueDateA = new Array();
     var moduleArray = new Array();
-
-    var data = daoUser.searchByID(sessionData);
+    sessionData = req.session ;
+    var data = daoUser.searchByID(sessionData.username);
 
     data.then((data) => {
         
@@ -271,8 +270,8 @@ controller.post('/sortEDueDate', function(req, res){
 controller.post('/sortLDueDate', function(req, res){
     var LatestDueDateA = new Array();
     var moduleArray = new Array();
-
-    var data = daoUser.searchByID(sessionData);
+    sessionData = req.session ;
+    var data = daoUser.searchByID(sessionData.username);
 
     data.then((data) => {
 
@@ -301,25 +300,30 @@ controller.post('/sortLDueDate', function(req, res){
 })
 
 controller.post('/log', function(req, res) {
-    sessionData = "" ; 
-    res.redirect('/');
+    req.session.destroy(function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          res.redirect('/');
+        }
+      });
 })
 
 controller.post('/delAll', function(req,res) {
-    daoUser.removeAllModules(sessionData);
+    sessionData = req.session;
+    daoUser.removeAllModules(sessionData.username);
     res.end();
 });
 
 controller.post('/delCompleted', function (req , res ){
-    console.log("com");
-    var t = daoUser.removeCompletedModules(sessionData);
+    sessionData = req.session ;
+    var t = daoUser.removeCompletedModules(sessionData.username);
     t.then((data) => {
         res.send(data);
     });
 });
 
 controller.post('/updateModule' , function(req,res){
-    
     var module_id = req.body.module_id;
     var projectTitle = req.body.projectTitle;
     var moduleName = req.body.mName;
@@ -344,7 +348,7 @@ controller.post('/completeMilestone' , function(req , res){
     var module_id = req.body.module_id ;
     var milestone_id = req.body.milestone_id; 
     var id = sessionData ; 
-    var t = daoUser.completeMilestone(id , milestone_id , module_id) ;
+    var t = daoUser.completeMilestone(id.username , milestone_id , module_id) ;
     t.then((mod) => {
         
            res.send(mod);

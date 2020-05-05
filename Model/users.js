@@ -148,12 +148,14 @@ class  DAO  {
     }
     
     searchByID(id) {
+        console.log(id +"151");
         return new Promise((resolve, reject) => {
             this.db.findOne({ _id: id }, function(err, entries) {
                 if (err) {
                     reject(err);
-                    console.log(err);
+                    console.log(err + "156");
                 } else {
+                    console.log(entries + "158");
                     resolve(entries);
                 }
             });
