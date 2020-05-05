@@ -3,7 +3,7 @@ This project was developed for the Web Platform Development 2 module by Group H.
 
 This is a coursework management application which allows students to manage items of coursework and any milestones involved in each item of coursework.
 
-This web application is hosted using a [Heroku URL].(https://webdev2-coursework.herokuapp.com/)
+This web application is hosted using a [Heroku URL](https://webdev2-coursework.herokuapp.com/).
 
 This application was developed using HTML5, CSS3, Mustache, Node.js, and AJAX. 
 
